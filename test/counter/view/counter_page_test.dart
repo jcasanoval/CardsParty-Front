@@ -13,7 +13,7 @@ class MockCounterCubit extends MockCubit<int> implements CounterCubit {}
 void main() {
   group('CounterPage', () {
     testWidgets('renders CounterView', (tester) async {
-      await tester.pumpApp(const CounterPage());
+      await tester.pumpApp(const CounterScreen());
       expect(find.byType(CounterView), findsOneWidget);
     });
   });
