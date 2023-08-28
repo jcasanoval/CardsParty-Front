@@ -12,8 +12,11 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: CounterRoute.page,
+          page: FindLobbyRoute.page,
           initial: true,
+        ),
+        AutoRoute(
+          page: CounterRoute.page,
         ),
       ];
 }
