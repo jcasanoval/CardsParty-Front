@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get_it/get_it.dart';
+import 'package:lobby_repository/lobby_repository.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -35,9 +37,17 @@ Future<void> bootstrap(
     options: firebaseOptions,
   );
 
+  _registerServices();
+
   Bloc.observer = const AppBlocObserver();
 
   // Add cross-flavor configuration here
 
   runApp(await builder());
+}
+
+final getIt = GetIt.instance;
+
+void _registerServices() {
+  getIt.registerSingleton<LobbyRepositoryContract>(FirebaseLobbyRepository());
 }
