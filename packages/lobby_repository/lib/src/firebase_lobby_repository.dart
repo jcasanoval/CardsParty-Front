@@ -3,7 +3,7 @@ import 'package:lobby_repository/lobby_repository.dart';
 
 /// Provides an instance of the lobbies collection
 CollectionReference<Lobby> _usersCollectionInstance() {
-  return FirebaseFirestore.instance.collection('users').withConverter<Lobby>(
+  return FirebaseFirestore.instance.collection('lobbies').withConverter<Lobby>(
         fromFirestore: (snapshot, _) => Lobby.fromJson(snapshot.data()!),
         toFirestore: (lobby, _) => lobby.toJson(),
       );
@@ -21,9 +21,11 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
   final CollectionReference<Lobby> _lobbyCollection;
 
   @override
-  Future<Lobby> createLobby() {
-    // TODO: implement createLobby
-    throw UnimplementedError();
+  Future<Lobby> createLobby() async {
+    final doc = _lobbyCollection.doc();
+    final lobby = Lobby.withRandomCode(id: doc.id);
+    await doc.set(lobby);
+    return lobby;
   }
 
   @override
