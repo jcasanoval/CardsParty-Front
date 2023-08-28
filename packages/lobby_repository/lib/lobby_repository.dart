@@ -2,4 +2,5 @@
 library lobby_repository;
 
 export 'src/contracts/contracts.dart';
-export 'src/lobby_repository.dart';
+export 'src/firebase_lobby_repository.dart';
+export 'src/models/models.dart';
