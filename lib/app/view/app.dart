@@ -1,7 +1,6 @@
 import 'package:cards_party/app/app.dart';
-import 'package:flutter/material.dart';
-import 'package:cards_party/counter/counter.dart';
 import 'package:cards_party/l10n/l10n.dart';
+import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
   App({super.key})
