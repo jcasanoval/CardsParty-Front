@@ -20,9 +20,13 @@ abstract class $AppRouter extends _i4.RootStackRouter {
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     CounterRoute.name: (routeData) {
+      final args = routeData.argsAs<CounterRouteArgs>();
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.CounterScreen(),
+        child: _i1.CounterScreen(
+          gameId: args.gameId,
+          key: args.key,
+        ),
       );
     },
     FindLobbyRoute.name: (routeData) {
@@ -46,16 +50,40 @@ abstract class $AppRouter extends _i4.RootStackRouter {
 
 /// generated route for
 /// [_i1.CounterScreen]
-class CounterRoute extends _i4.PageRouteInfo<void> {
-  const CounterRoute({List<_i4.PageRouteInfo>? children})
-      : super(
+class CounterRoute extends _i4.PageRouteInfo<CounterRouteArgs> {
+  CounterRoute({
+    required String gameId,
+    _i5.Key? key,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
           CounterRoute.name,
+          args: CounterRouteArgs(
+            gameId: gameId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CounterRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i4.PageInfo<CounterRouteArgs> page =
+      _i4.PageInfo<CounterRouteArgs>(name);
+}
+
+class CounterRouteArgs {
+  const CounterRouteArgs({
+    required this.gameId,
+    this.key,
+  });
+
+  final String gameId;
+
+  final _i5.Key? key;
+
+  @override
+  String toString() {
+    return 'CounterRouteArgs{gameId: $gameId, key: $key}';
+  }
 }
 
 /// generated route for
