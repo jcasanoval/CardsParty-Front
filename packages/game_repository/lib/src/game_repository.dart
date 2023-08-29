@@ -15,8 +15,11 @@ class FirebaseGameRepository extends GameRepositoryContract {
 
   @override
   Stream<Game> listenToGame(String gameId) {
-    // TODO: implement listenToGame
-    throw UnimplementedError();
+    return FirebaseDatabase.instance.ref('games/$gameId').onValue.map(
+          (event) => Game.fromJson(
+            event.snapshot.value as Map<dynamic, dynamic>,
+          ),
+        );
   }
 
   @override
