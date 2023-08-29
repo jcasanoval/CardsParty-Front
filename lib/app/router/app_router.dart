@@ -15,8 +15,7 @@ class AppRouter extends $AppRouter {
           page: FindLobbyRoute.page,
           initial: true,
         ),
-        AutoRoute(
-          page: CounterRoute.page,
-        ),
+        AutoRoute(page: CounterRoute.page),
+        AutoRoute(page: LobbyRoute.page),
       ];
 }
