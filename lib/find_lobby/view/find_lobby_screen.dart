@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cards_party/app/router/app_router.gr.dart';
 import 'package:cards_party/bootstrap.dart';
 import 'package:cards_party/find_lobby/find_lobby.dart';
 import 'package:flutter/material.dart';
@@ -50,11 +51,8 @@ class FindLobbyView extends StatelessWidget {
                 try {
                   final lobby = await getIt<LobbyRepositoryContract>()
                       .joinLobbyByGamecode(_controller.text);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                          'Found lobby with code ${lobby.gameCode} and id ${lobby.id}'),
-                    ),
+                  await context.router.push(
+                    LobbyRoute(lobbyId: lobby.id),
                   );
                 } on LobbyException catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -77,10 +75,8 @@ class FindLobbyView extends StatelessWidget {
               onPressed: () async {
                 final lobby =
                     await getIt<LobbyRepositoryContract>().createLobby();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Created lobby with code ${lobby.gameCode}'),
-                  ),
+                await context.router.push(
+                  LobbyRoute(lobbyId: lobby.id),
                 );
               },
             ),

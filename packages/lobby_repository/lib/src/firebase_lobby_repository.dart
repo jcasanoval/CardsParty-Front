@@ -42,4 +42,30 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
     }
     return snapshot.docs.first.data();
   }
+
+  @override
+  Stream<Lobby> listenToLobby(String lobbyId) {
+    return _lobbyCollection.doc(lobbyId).snapshots().map((snapshot) {
+      if (!snapshot.exists) {
+        throw const LobbyNotFoundException();
+      }
+      return snapshot.data()!;
+    });
+  }
+
+  @override
+  Future<void> updateLobby(String lobbyId, Lobby Function(Lobby) update) async {
+    final lobbyRef = _lobbyCollection.doc(lobbyId);
+    await FirebaseFirestore.instance.runTransaction<void>((transaction) async {
+      final snapshot = await transaction.get(lobbyRef);
+      if (!snapshot.exists) {
+        throw const LobbyNotFoundException();
+      }
+      final lobby = snapshot.data()!;
+
+      final updatedLobby = update(lobby);
+
+      transaction.update(lobbyRef, updatedLobby.toJson());
+    });
+  }
 }
