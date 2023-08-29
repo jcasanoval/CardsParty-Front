@@ -2,7 +2,7 @@ import 'package:game_repository/game_repository.dart';
 
 abstract class GameRepositoryContract {
   /// Creates a new game.
-  Future<Game> createGame(Game game);
+  Future<void> createGame(Game game);
 
   /// Listens to a game with matching [gameId].
   Stream<Game> listenToGame(String gameId);
