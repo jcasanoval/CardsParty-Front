@@ -6,12 +6,17 @@ import 'package:cards_party/l10n/l10n.dart';
 
 @RoutePage()
 class CounterScreen extends StatelessWidget {
-  const CounterScreen({super.key});
+  const CounterScreen({
+    required this.gameId,
+    super.key,
+  });
+
+  final String gameId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CounterCubit(),
+      create: (_) => CounterCubit()..listenToGame(gameId),
       child: const CounterView(),
     );
   }
@@ -33,11 +38,13 @@ class CounterView extends StatelessWidget {
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().increment(),
             child: const Icon(Icons.add),
+            heroTag: 'add',
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().decrement(),
             child: const Icon(Icons.remove),
+            heroTag: 'remove',
           ),
         ],
       ),
@@ -51,7 +58,10 @@ class CounterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final count = context.select((CounterCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.displayLarge);
+    return BlocBuilder<CounterCubit, int>(
+      builder: (context, state) {
+        return Text('$state', style: theme.textTheme.displayLarge);
+      },
+    );
   }
 }
