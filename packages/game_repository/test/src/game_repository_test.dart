@@ -6,7 +6,7 @@ import 'package:game_repository/game_repository.dart';
 void main() {
   group('GameRepository', () {
     test('can be instantiated', () {
-      expect(GameRepository(), isNotNull);
+      expect(FirebaseGameRepository(), isNotNull);
     });
   });
 }
