@@ -9,4 +9,10 @@ abstract class LobbyRepositoryContract {
 
   /// Joins a lobby with matching [gameCode].
   Future<Lobby> joinLobbyByGamecode(String gameCode);
+
+  /// Listens to a lobby with matching [lobbyId].
+  Stream<Lobby> listenToLobby(String lobbyId);
+
+  /// Updates a lobby with matching [lobbyId] using the [update] method provided
+  Future<void> updateLobby(String lobbyId, Lobby Function(Lobby) update);
 }
