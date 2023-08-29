@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:game_repository/game_repository.dart';
 
 /// {@template game_repository}
@@ -8,9 +9,8 @@ class FirebaseGameRepository extends GameRepositoryContract {
   FirebaseGameRepository();
 
   @override
-  Future<Game> createGame(Game game) {
-    // TODO: implement createGame
-    throw UnimplementedError();
+  Future<void> createGame(Game game) async {
+    await FirebaseDatabase.instance.ref('games/${game.id}').set(game.toJson());
   }
 
   @override
