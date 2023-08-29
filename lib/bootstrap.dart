@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:game_repository/game_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 
@@ -49,5 +50,7 @@ Future<void> bootstrap(
 final getIt = GetIt.instance;
 
 void _registerServices() {
-  getIt.registerSingleton<LobbyRepositoryContract>(FirebaseLobbyRepository());
+  getIt
+    ..registerSingleton<LobbyRepositoryContract>(FirebaseLobbyRepository())
+    ..registerSingleton<GameRepositoryContract>(FirebaseGameRepository());
 }
