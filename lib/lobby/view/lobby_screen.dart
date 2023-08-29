@@ -29,7 +29,7 @@ class LobbyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text('Lobby')),
+      appBar: AppBar(title: const Text('Lobby')),
       body: BlocBuilder<LobbyCubit, LobbyState>(
         builder: (context, state) {
           switch (state) {
