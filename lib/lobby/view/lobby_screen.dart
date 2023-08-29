@@ -17,15 +17,13 @@ class LobbyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => LobbyCubit()..loadLobby(lobbyId),
-      child: LobbyView(),
+      child: const LobbyView(),
     );
   }
 }
 
 class LobbyView extends StatelessWidget {
-  LobbyView({super.key});
-
-  final _controller = TextEditingController();
+  const LobbyView({super.key});
 
   @override
   Widget build(BuildContext context) {
