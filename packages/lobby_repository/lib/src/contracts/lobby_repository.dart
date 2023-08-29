@@ -8,5 +8,5 @@ abstract class LobbyRepositoryContract {
   Future<Lobby> createLobby();
 
   /// Joins a lobby with matching [gameCode].
-  Future<Lobby> joinLobby(String gameCode);
+  Future<Lobby> joinLobbyByGamecode(String gameCode);
 }

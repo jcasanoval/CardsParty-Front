@@ -2,20 +2,25 @@ import 'dart:math';
 
 const _kId = 'id';
 const _kGameCode = 'gameCode';
+const _kCreated = 'created';
 
 class Lobby {
   const Lobby({
     required this.gameCode,
+    required this.created,
     this.id = '',
   });
 
   final String id;
   final String gameCode;
+  final DateTime created;
 
   Lobby.withRandomCode({
     required String id,
+    required DateTime created,
   }) : this(
           id: id,
+          created: created,
           gameCode: _generateRandomCode(),
         );
 
@@ -34,12 +39,14 @@ class Lobby {
       : this(
           id: json[_kId]! as String,
           gameCode: json[_kGameCode]! as String,
+          created: DateTime.parse(json[_kCreated]! as String),
         );
 
   Map<String, Object?> toJson() {
     return {
       _kId: id,
       _kGameCode: gameCode,
+      _kCreated: created.toIso8601String(),
     };
   }
 }
