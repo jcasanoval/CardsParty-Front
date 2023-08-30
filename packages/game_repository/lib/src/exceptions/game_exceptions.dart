@@ -7,7 +7,11 @@ sealed class GameException implements Exception {
   String toString() => message;
 }
 
-class GameNotFoundException extends GameException {
+final class GameNotFoundException extends GameException {
   const GameNotFoundException(String gameId)
       : super('Game with id $gameId not found');
+}
+
+final class FailedToUpdateGameException extends GameException {
+  const FailedToUpdateGameException() : super('Failed to update game');
 }
