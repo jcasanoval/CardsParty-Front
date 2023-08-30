@@ -23,8 +23,25 @@ class FirebaseGameRepository extends GameRepositoryContract {
   }
 
   @override
-  Future<void> updateGame(String gameId, Game Function(Game p1) update) {
-    // TODO: implement updateGame
-    throw UnimplementedError();
+  Future<void> updateGame(String gameId, Game Function(Game) update) async {
+    final tResult = await FirebaseDatabase.instance
+        .ref('games/$gameId')
+        .runTransaction((gameJson) {
+      final game = Game.fromJson(gameJson as Map<dynamic, dynamic>);
+      late Transaction transaction;
+
+      try {
+        final updatedGame = update(game);
+        transaction = Transaction.success(updatedGame.toJson());
+      } catch (e) {
+        transaction = Transaction.abort();
+      }
+
+      return transaction;
+    });
+
+    if (!tResult.committed) {
+      throw const FailedToUpdateGameException();
+    }
   }
 }
