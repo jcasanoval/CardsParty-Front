@@ -1,1 +1,1 @@
-export 'lobby_repository.dart';
+export 'lobby_repository_contract.dart';
