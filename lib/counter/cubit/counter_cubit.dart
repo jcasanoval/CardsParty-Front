@@ -8,19 +8,29 @@ class CounterCubit extends Cubit<int> {
   CounterCubit() : super(0);
 
   late final StreamSubscription<Game> _stream;
+  late final String _gameId;
+
+  final _gameRepository = getIt<GameRepositoryContract>();
 
   void listenToGame(String gameId) {
-    _stream = getIt<GameRepositoryContract>().listenToGame(gameId).listen(
+    _gameId = gameId;
+    _stream = _gameRepository.listenToGame(gameId).listen(
           (game) => emit(game.value),
         );
   }
 
   void increment() {
-    emit(state + 1);
+    _gameRepository.updateGame(_gameId, (game) {
+      game.value++;
+      return game;
+    });
   }
 
   void decrement() {
-    emit(state - 1);
+    _gameRepository.updateGame(_gameId, (game) {
+      game.value--;
+      return game;
+    });
   }
 
   @override
