@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  game_repository:
+    path: ../game_repository
+  lobby_repository:
+    path: ../lobby_repository
 
 dev_dependencies:
   flutter_test:
