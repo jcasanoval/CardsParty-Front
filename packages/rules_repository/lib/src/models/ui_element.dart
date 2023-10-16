@@ -1,5 +1,9 @@
 part 'button.dart';
 
 sealed class UIElement {
-  UIElement();
+  UIElement({
+    required this.enabled,
+  });
+
+  final bool enabled;
 }

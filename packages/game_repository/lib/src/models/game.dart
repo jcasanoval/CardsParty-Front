@@ -1,45 +1,31 @@
+import 'package:game_repository/game_repository.dart';
+
 const _kId = 'id';
 const _kPlayerHands = 'playerHands';
 const _kPlayers = 'players';
-const _kCustomsRulesParams = 'customsRulesParams';
+const _KCustomParams = 'customParams';
 
 class Game {
-  Game(
-      {required this.id,
-      required this.playerHands,
-      required this.players,
-      required this.customsRulesParams});
+  Game({
+    required this.id,
+    required this.players,
+    required this.customParams,
+  });
 
   Game.fromJson(Map<dynamic, dynamic> json)
       : this(
-            id: json[_kId] as String,
-            playerHands: (json[_kPlayerHands] as List<List<int>>)
-                .map((hand) => hand.cast<int?>().toList())
-                .toList(),
-            players: json[_kPlayers] as List<Player>,
-            customsRulesParams:
-                json[_kCustomsRulesParams] as Map<String, dynamic>
-            );
+          id: json[_kId] as String,
+          players: json[_kPlayers] as List<Player>,
+          customParams: json[_KCustomParams] as Map<String, dynamic>,
+        );
 
   final String id;
-  final List<List<int?>> playerHands;
   final List<Player> players;
-  final Map<String, dynamic> customsRulesParams;
+  final Map<String, dynamic> customParams;
 
   Map<String, dynamic> toJson() {
     return {
       _kId: id,
-      _kPlayerHands: playerHands,
     };
   }
-}
-
-class Player {
-  final String id;
-  final List<int?> cards; // Lista de cartas del jugador
-
-  Player({
-    required this.id,
-    required this.cards,
-  });
 }
