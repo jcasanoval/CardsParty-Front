@@ -7,6 +7,7 @@ final class Button extends UIElement {
     required this.color,
     required this.size,
     required this.type,
+    required super.enabled,
   });
 
   final bool showButton;
