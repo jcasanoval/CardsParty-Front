@@ -15,20 +15,22 @@ class CounterCubit extends Cubit<int> {
   void listenToGame(String gameId) {
     _gameId = gameId;
     _stream = _gameRepository.listenToGame(gameId).listen(
-          (game) => emit(game.value),
+          (game) => emit(game.customParams['value'] as int? ?? 0),
         );
   }
 
   void increment() {
     _gameRepository.updateGame(_gameId, (game) {
-      game.value++;
+      final value = game.customParams['value'] as int? ?? 0;
+      game.customParams['value'] = value + 1;
       return game;
     });
   }
 
   void decrement() {
     _gameRepository.updateGame(_gameId, (game) {
-      game.value--;
+      final value = game.customParams['value'] as int? ?? 0;
+      game.customParams['value'] = value - 1;
       return game;
     });
   }
