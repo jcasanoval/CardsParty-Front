@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cards_party/app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:cards_party/app/router/app_router.gr.dart';
 import 'package:cards_party/bootstrap.dart';
 import 'package:cards_party/find_lobby/find_lobby.dart';
@@ -30,14 +31,17 @@ class FindLobbyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text('Find lobby')),
+      appBar: AppBar(
+        title:
+            Text('Welcome back ${context.read<AuthCubit>().currentUser.name}'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: _controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Enter lobby code',
               ),
               maxLength: 4,
@@ -46,7 +50,7 @@ class FindLobbyView extends StatelessWidget {
               ],
             ),
             TextButton(
-              child: Text('Find Lobby'),
+              child: const Text('Find Lobby'),
               onPressed: () async {
                 try {
                   final lobby = await getIt<LobbyRepositoryContract>()
@@ -62,7 +66,7 @@ class FindLobbyView extends StatelessWidget {
                   );
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content:
                           Text('Unknown error occurred while joining lobby'),
                     ),
@@ -71,7 +75,7 @@ class FindLobbyView extends StatelessWidget {
               },
             ),
             TextButton(
-              child: Text('Create Lobby'),
+              child: const Text('Create Lobby'),
               onPressed: () async {
                 final lobby =
                     await getIt<LobbyRepositoryContract>().createLobby();
