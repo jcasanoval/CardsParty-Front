@@ -5,19 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class LoadingScreen extends StatelessWidget {
+class LoadingScreen extends StatefulWidget {
   const LoadingScreen({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return const CounterView();
-  }
+  State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
-class CounterView extends StatelessWidget {
-  const CounterView({super.key});
+class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    if (context.read<AuthCubit>().state is Authenticated) {
+      context.router.replace(const FindLobbyRoute());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
