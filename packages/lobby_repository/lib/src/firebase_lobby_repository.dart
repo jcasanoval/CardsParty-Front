@@ -21,12 +21,16 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
   final CollectionReference<Lobby> _lobbyCollection;
 
   @override
-  Future<Lobby> createLobby() async {
+  Future<Lobby> createLobby({
+    required String hostId,
+  }) async {
     final doc = _lobbyCollection.doc();
     final lobby = Lobby.withRandomCode(
       id: doc.id,
       created: DateTime.now(),
+      hostId: hostId,
     );
+    lobby;
     await doc.set(lobby);
     return lobby;
   }

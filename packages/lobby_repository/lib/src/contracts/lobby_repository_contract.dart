@@ -5,7 +5,9 @@ import 'package:lobby_repository/lobby_repository.dart';
 /// {@endtemplate}
 abstract class LobbyRepositoryContract {
   /// Creates a new lobby.
-  Future<Lobby> createLobby();
+  Future<Lobby> createLobby({
+    required String hostId,
+  });
 
   /// Joins a lobby with matching [gameCode].
   Future<Lobby> joinLobbyByGamecode(String gameCode);
