@@ -46,7 +46,10 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
       throw const LobbyNotFoundException();
     }
     var lobbyFound = snapshot.docs.first.data();
-    updateLobby(lobbyFound.id, (lobby) {
+    if (lobbyFound.players.any((p) => p.id == player.id)) {
+      return lobbyFound;
+    }
+    await updateLobby(lobbyFound.id, (lobby) {
       lobby.players.add(player);
       lobbyFound = lobby;
       return lobby;
