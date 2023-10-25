@@ -29,7 +29,14 @@ class FindLobbyView extends StatelessWidget {
       listener: (context, state) {
         if (state is LobbyFound) {
           context.router.push(
-            LobbyRoute(lobbyId: state.lobby.id),
+            LobbyRoute(lobbyId: state.lobbyId),
+          );
+        }
+        if (state is FindLobbyError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error),
+            ),
           );
         }
       },
