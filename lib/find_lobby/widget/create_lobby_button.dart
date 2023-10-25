@@ -15,8 +15,9 @@ class CreateLobbyButton extends StatelessWidget {
     return TextButton(
       child: const Text('Create Lobby'),
       onPressed: () async {
+        final currentUser = context.read<AuthCubit>().currentUser;
         final lobby = await getIt<LobbyRepositoryContract>().createLobby(
-          hostId: context.read<AuthCubit>().currentUser.id,
+          host: LobbyPlayer(id: currentUser.id, name: currentUser.name),
         );
         await context.router.push(
           LobbyRoute(lobbyId: lobby.id),
