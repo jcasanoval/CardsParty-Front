@@ -5,12 +5,14 @@ import 'package:lobby_repository/lobby_repository.dart';
 const _kId = 'id';
 const _kGameCode = 'gameCode';
 const _kCreated = 'created';
+const _kHostId = 'hostId';
 const _kStatus = 'status';
 
 class Lobby {
   Lobby({
     required this.gameCode,
     required this.created,
+    required this.hostId,
     this.id = '',
     this.status = LobbyStatus.waiting,
   });
@@ -19,9 +21,11 @@ class Lobby {
   Lobby.withRandomCode({
     required String id,
     required DateTime created,
+    required String hostId,
   }) : this(
           id: id,
           created: created,
+          hostId: hostId,
           gameCode: _generateRandomCode(),
         );
 
@@ -31,12 +35,14 @@ class Lobby {
           id: json[_kId]! as String,
           gameCode: json[_kGameCode]! as String,
           created: DateTime.parse(json[_kCreated]! as String),
+          hostId: json[_kHostId]! as String,
           status: LobbyStatus.fromKey(json[_kStatus]! as String),
         );
 
   final String id;
   final String gameCode;
   final DateTime created;
+  final String hostId;
   LobbyStatus status;
 
   static String _generateRandomCode() {
@@ -56,6 +62,7 @@ class Lobby {
       _kId: id,
       _kGameCode: gameCode,
       _kCreated: created.toIso8601String(),
+      _kHostId: hostId,
       _kStatus: status.key,
     };
   }

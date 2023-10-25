@@ -1,11 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cards_party/app/app.dart';
-import 'package:cards_party/bootstrap.dart';
-import 'package:cards_party/l10n/l10n.dart';
-import 'package:cards_party/lobby/lobby.dart';
+import 'package:cards_party/lobby_screen/lobby_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_repository/game_repository.dart';
 
 @RoutePage()
 class LobbyScreen extends StatelessWidget {
@@ -19,7 +16,7 @@ class LobbyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LobbyCubit()..loadLobby(lobbyId),
+      create: (_) => LobbyScreenCubit()..loadLobby(lobbyId),
       child: const LobbyView(),
     );
   }
@@ -30,13 +27,23 @@ class LobbyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: const Text('Lobby')),
-      body: BlocBuilder<LobbyCubit, LobbyState>(
+      body: BlocConsumer<LobbyScreenCubit, LobbyScreenState>(
+        listener: (context, state) {
+          if (state is GameStarted) {
+            Future.delayed(Duration(seconds: 2), () {
+              context.router.replace(
+                CounterRoute(
+                  gameId: state.lobby.id,
+                ),
+              );
+            });
+          }
+        },
         builder: (context, state) {
           switch (state) {
-            case LobbyInitial():
+            case LobbyScreenInitial():
               return const Center(child: CircularProgressIndicator());
             case LobbyLoaded():
               return Center(
@@ -45,26 +52,17 @@ class LobbyView extends StatelessWidget {
                   children: [
                     Text('Lobby code: ${state.lobby.gameCode}'),
                     Text('Lobby id: ${state.lobby.id}'),
-                    TextButton(
-                      child: const Text('Start game'),
-                      onPressed: () {
-                        getIt<GameRepositoryContract>()
-                            .createGame(Game(id: state.lobby.id));
-                        context.router
-                            .push(CounterRoute(gameId: state.lobby.id));
-                      },
-                    ),
+                    const StartGameButton(),
                   ],
                 ),
               );
-            case LobbyError():
+            case LobbyScreenError():
               return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(state.message),
-                  ],
-                ),
+                child: Text(state.message),
+              );
+            case GameStarted():
+              return const Center(
+                child: Text('Game starting...'),
               );
           }
         },
