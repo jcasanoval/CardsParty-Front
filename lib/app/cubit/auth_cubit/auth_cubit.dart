@@ -18,4 +18,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(Authenticated(User(id: guid.value)));
     });
   }
+
+  void changeName(String name) {
+    if (state is Authenticated) {
+      emit(Authenticated((state as Authenticated).user.copyWith(name: name)));
+    }
+  }
 }
