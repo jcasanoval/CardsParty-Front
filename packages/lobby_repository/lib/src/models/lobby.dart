@@ -49,7 +49,7 @@ class Lobby {
   final String id;
   final String gameCode;
   final DateTime created;
-  final String hostId;
+  String hostId;
   List<LobbyPlayer> players;
   LobbyStatus status;
 
