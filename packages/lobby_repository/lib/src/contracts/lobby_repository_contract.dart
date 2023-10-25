@@ -10,7 +10,7 @@ abstract class LobbyRepositoryContract {
   });
 
   /// Joins a lobby with matching [gameCode].
-  Future<Lobby> joinLobbyByGamecode(String gameCode);
+  Future<Lobby> joinLobbyByGamecode(String gameCode, LobbyPlayer player);
 
   /// Listens to a lobby with matching [lobbyId].
   Stream<Lobby> listenToLobby(String lobbyId);
