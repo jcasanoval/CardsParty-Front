@@ -7,12 +7,14 @@ const _kGameCode = 'gameCode';
 const _kCreated = 'created';
 const _kHostId = 'hostId';
 const _kStatus = 'status';
+const _kPlayers = 'players';
 
 class Lobby {
   Lobby({
     required this.gameCode,
     required this.created,
     required this.hostId,
+    required this.players,
     this.id = '',
     this.status = LobbyStatus.waiting,
   });
@@ -26,6 +28,7 @@ class Lobby {
           id: id,
           created: created,
           hostId: hostId,
+          players: [],
           gameCode: _generateRandomCode(),
         );
 
@@ -37,12 +40,17 @@ class Lobby {
           created: DateTime.parse(json[_kCreated]! as String),
           hostId: json[_kHostId]! as String,
           status: LobbyStatus.fromKey(json[_kStatus]! as String),
+          players: (json[_kPlayers]! as List<Object?>)
+              .map((player) =>
+                  LobbyPlayer.fromJson(player! as Map<String, Object?>))
+              .toList(),
         );
 
   final String id;
   final String gameCode;
   final DateTime created;
-  final String hostId;
+  String hostId;
+  List<LobbyPlayer> players;
   LobbyStatus status;
 
   static String _generateRandomCode() {
@@ -64,6 +72,7 @@ class Lobby {
       _kCreated: created.toIso8601String(),
       _kHostId: hostId,
       _kStatus: status.key,
+      _kPlayers: players.map((player) => player.toJson()).toList(),
     };
   }
 }

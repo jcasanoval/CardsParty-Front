@@ -3,16 +3,16 @@ import 'package:flutter/services.dart';
 
 class LobbyCodeTextField extends StatelessWidget {
   const LobbyCodeTextField({
+    required this.controller,
     super.key,
-    required TextEditingController controller,
-  }) : _controller = controller;
+  });
 
-  final TextEditingController _controller;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _controller,
+      controller: controller,
       decoration: const InputDecoration(
         hintText: 'Enter lobby code',
       ),

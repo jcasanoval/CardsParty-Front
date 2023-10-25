@@ -22,29 +22,39 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
 
   @override
   Future<Lobby> createLobby({
-    required String hostId,
+    required LobbyPlayer host,
   }) async {
     final doc = _lobbyCollection.doc();
     final lobby = Lobby.withRandomCode(
       id: doc.id,
       created: DateTime.now(),
-      hostId: hostId,
+      hostId: host.id,
     );
-    lobby;
+    lobby.players.add(host);
     await doc.set(lobby);
     return lobby;
   }
 
   @override
-  Future<Lobby> joinLobbyByGamecode(String gameCode) async {
+  Future<Lobby> joinLobbyByGamecode(String gameCode, LobbyPlayer player) async {
     final snapshot = await _lobbyCollection
         .where('gameCode', isEqualTo: gameCode)
+        .where('status', isEqualTo: LobbyStatus.waiting.key)
         .orderBy('created', descending: true)
         .get();
     if (snapshot.docs.isEmpty) {
       throw const LobbyNotFoundException();
     }
-    return snapshot.docs.first.data();
+    var lobbyFound = snapshot.docs.first.data();
+    if (lobbyFound.players.any((p) => p.id == player.id)) {
+      return lobbyFound;
+    }
+    await updateLobby(lobbyFound.id, (lobby) {
+      lobby.players.add(player);
+      lobbyFound = lobby;
+      return lobby;
+    });
+    return lobbyFound;
   }
 
   @override

@@ -6,6 +6,9 @@ enum LobbyStatus {
   /// The lobby has started.
   started('started'),
 
+  /// The lobby was canceled.
+  canceled('canceled'),
+
   /// The lobby has finished.
   finished('finished');
 
