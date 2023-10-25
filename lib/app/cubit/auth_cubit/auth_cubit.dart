@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:meta/meta.dart';
 
 part 'auth_state.dart';
@@ -12,8 +13,9 @@ class AuthCubit extends Cubit<AuthState> {
       : User(id: '', name: 'Unauthenticated');
 
   void init() {
+    final guid = Guid.generate();
     Future.delayed(Duration(seconds: 2), () {
-      emit(Authenticated(User(id: '1')));
+      emit(Authenticated(User(id: guid.value)));
     });
   }
 }
