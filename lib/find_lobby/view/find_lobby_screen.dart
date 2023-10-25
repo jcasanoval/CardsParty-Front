@@ -26,8 +26,9 @@ class FindLobbyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('Welcome back ${context.watch<AuthCubit>().currentUser.name}'),
+        title: Text(
+          'Welcome back ${context.watch<AuthCubit>().currentUser.name}!',
+        ),
       ),
       body: Center(
         child: Column(
