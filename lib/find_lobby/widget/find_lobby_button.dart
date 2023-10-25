@@ -17,7 +17,7 @@ class FindLobbyButton extends StatelessWidget {
     return TextButton(
       child: const Text('Find Lobby'),
       onPressed: () {
-        final currentUser = context.read<AuthCubit>().currentUser;
+        final currentUser = context.currentUser;
         context.read<FindLobbyCubit>().joinByGameCode(
               controller.text,
               LobbyPlayer(id: currentUser.id, name: currentUser.name),
