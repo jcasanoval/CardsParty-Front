@@ -33,9 +33,12 @@ class FindLobbyView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(),
             LobbyCodeTextField(controller: _controller),
             FindLobbyButton(controller: _controller),
             const CreateLobbyButton(),
+            const Spacer(),
+            const ChangeNameButton(),
           ],
         ),
       ),
