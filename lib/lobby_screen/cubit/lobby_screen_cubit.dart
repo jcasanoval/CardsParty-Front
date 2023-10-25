@@ -54,6 +54,29 @@ class LobbyScreenCubit extends Cubit<LobbyScreenState> {
     }
   }
 
+  Future<bool> leaveLobby(String userId) async {
+    final currentState = state;
+    if (currentState is! LobbyLoaded) {
+      return false;
+    }
+    final lobby = currentState.lobby;
+    try {
+      await _lobbyRepository.updateLobby(lobby.id, (lobby) {
+        lobby.players.removeWhere((player) => player.id == userId);
+        if (lobby.players.isEmpty) {
+          lobby.status = LobbyStatus.canceled;
+        } else if (lobby.hostId == userId) {
+          lobby.hostId = lobby.players.first.id;
+        }
+        return lobby;
+      });
+    } on LobbyException catch (e) {
+      emit(LobbyScreenError(e.message));
+      return false;
+    }
+    return true;
+  }
+
   @override
   Future<void> close() {
     _lobbySubscription.cancel();
