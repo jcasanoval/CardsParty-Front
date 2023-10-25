@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cards_party/app/app.dart';
 import 'package:cards_party/app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:cards_party/find_lobby/find_lobby.dart';
 import 'package:flutter/material.dart';
@@ -24,23 +25,32 @@ class FindLobbyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Welcome back ${context.watch<AuthCubit>().currentUser.name}!',
+    return BlocListener<FindLobbyCubit, FindLobbyState>(
+      listener: (context, state) {
+        if (state is LobbyFound) {
+          context.router.push(
+            LobbyRoute(lobbyId: state.lobby.id),
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Welcome back ${context.watch<AuthCubit>().currentUser.name}!',
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(),
-            LobbyCodeTextField(controller: _controller),
-            FindLobbyButton(controller: _controller),
-            const CreateLobbyButton(),
-            const Spacer(),
-            const ChangeNameButton(),
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              LobbyCodeTextField(controller: _controller),
+              FindLobbyButton(controller: _controller),
+              const CreateLobbyButton(),
+              const Spacer(),
+              const ChangeNameButton(),
+            ],
+          ),
         ),
       ),
     );
