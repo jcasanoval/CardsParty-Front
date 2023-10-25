@@ -13,6 +13,13 @@ class AuthCubit extends HydratedCubit<AuthState> {
       ? (state as Authenticated).user
       : User(id: '', name: 'Unauthenticated');
 
+  void init() {
+    if (state is AuthInitial) {
+      final guid = Guid.generate();
+      emit(Authenticated(User(id: guid.value)));
+    }
+  }
+
   void changeName(String name) {
     if (state is Authenticated) {
       emit(Authenticated((state as Authenticated).user.copyWith(name: name)));

@@ -12,7 +12,7 @@ import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:cards_party/counter/view/counter_screen.dart' as _i1;
 import 'package:cards_party/find_lobby/view/find_lobby_screen.dart' as _i2;
 import 'package:cards_party/loading_screen/view/loading_screen.dart' as _i3;
-import 'package:cards_party/lobby/view/lobby_screen.dart' as _i4;
+import 'package:cards_party/lobby_screen/view/lobby_screen.dart' as _i4;
 import 'package:flutter/material.dart' as _i6;
 
 abstract class $AppRouter extends _i5.RootStackRouter {
