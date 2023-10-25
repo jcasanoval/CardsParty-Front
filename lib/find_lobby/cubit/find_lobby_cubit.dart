@@ -11,14 +11,27 @@ class FindLobbyCubit extends Cubit<FindLobbyState> {
   final _lobbyServices = getIt<LobbyRepositoryContract>();
 
   Future<void> createLobby(LobbyPlayer host) async {
-    final initialState = state;
     emit(FindLobbyLoading());
     try {
       final lobby = await _lobbyServices.createLobby(host: host);
-      emit(LobbyFound(lobby: lobby));
+      emit(LobbyFound(lobbyId: lobby.id));
     } catch (e) {
       emit(FindLobbyError(error: 'Something went wrong'));
-      emit(initialState);
+      emit(FindLobbyInitial());
+    }
+  }
+
+  Future<void> joinByGameCode(String gameCode, LobbyPlayer player) async {
+    emit(FindLobbyLoading());
+    try {
+      final lobby = await _lobbyServices.joinLobbyByGamecode(gameCode, player);
+      emit(LobbyFound(lobbyId: lobby.id));
+    } on LobbyNotFoundException {
+      emit(FindLobbyError(error: 'Lobby not found'));
+      emit(FindLobbyInitial());
+    } catch (e) {
+      emit(FindLobbyError(error: 'Something went wrong'));
+      emit(FindLobbyInitial());
     }
   }
 }

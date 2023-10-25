@@ -8,13 +8,13 @@ final class FindLobbyInitial extends FindLobbyState {}
 final class FindLobbyLoading extends FindLobbyState {}
 
 final class LobbyFound extends FindLobbyState {
-  LobbyFound({required this.lobby});
+  LobbyFound({required this.lobbyId});
 
-  final Lobby lobby;
+  final String lobbyId;
 }
 
 final class FindLobbyError extends FindLobbyState {
   FindLobbyError({required this.error});
 
-  final Object error;
+  final String error;
 }
