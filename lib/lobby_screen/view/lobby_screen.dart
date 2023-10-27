@@ -51,6 +51,9 @@ class LobbyView extends StatelessWidget {
                   CounterRoute(
                     gameId: state.lobby.id,
                   ),
+                  // GameRoute(
+                  //   gameId: state.lobby.id,
+                  // ),
                 );
               });
             }
