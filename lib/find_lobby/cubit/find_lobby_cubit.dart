@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cards_party/bootstrap.dart';
+import 'package:equatable/equatable.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 import 'package:meta/meta.dart';
 
