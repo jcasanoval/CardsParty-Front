@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 const _kId = 'id';
 const _kName = 'name';
 
-class LobbyPlayer {
+class LobbyPlayer extends Equatable {
   const LobbyPlayer({
     required this.id,
     required this.name,
@@ -24,4 +26,8 @@ class LobbyPlayer {
       _kName: name,
     };
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, name];
 }

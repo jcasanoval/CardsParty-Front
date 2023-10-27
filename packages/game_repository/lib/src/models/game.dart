@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:game_repository/game_repository.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 
@@ -6,7 +7,7 @@ const _kPlayers = 'players';
 const _kCustomParams = 'customParams';
 const _kHostId = 'hostId';
 
-class Game {
+class Game extends Equatable {
   Game({
     required this.id,
     required this.players,
@@ -46,4 +47,7 @@ class Game {
       _kHostId: hostId,
     };
   }
+
+  @override
+  List<Object?> get props => [id, players, hostId, customParams];
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cards_party/bootstrap.dart';
+import 'package:equatable/equatable.dart';
 import 'package:game_repository/game_repository.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 

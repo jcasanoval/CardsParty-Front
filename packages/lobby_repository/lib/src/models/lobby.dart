@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:equatable/equatable.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 
 const _kId = 'id';
@@ -9,7 +10,7 @@ const _kHostId = 'hostId';
 const _kStatus = 'status';
 const _kPlayers = 'players';
 
-class Lobby {
+class Lobby extends Equatable {
   Lobby({
     required this.gameCode,
     required this.created,
@@ -75,4 +76,7 @@ class Lobby {
       _kPlayers: players.map((player) => player.toJson()).toList(),
     };
   }
+
+  @override
+  List<Object?> get props => [id, gameCode, created, hostId, players, status];
 }
