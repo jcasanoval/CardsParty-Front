@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 
 const _kId = 'id';
 const _kName = 'name';
 const _kCards = 'cards';
 
-class Player {
+class Player extends Equatable {
   Player({
     required this.id,
     required this.name,
@@ -34,4 +35,7 @@ class Player {
       _kCards: cards,
     };
   }
+
+  @override
+  List<Object?> get props => [id, name, cards];
 }
