@@ -17,7 +17,7 @@ class FirebaseGameRepository extends GameRepositoryContract {
   Stream<Game> listenToGame(String gameId) {
     return FirebaseDatabase.instance.ref('games/$gameId').onValue.map(
           (event) => Game.fromJson(
-            event.snapshot.value as Map<dynamic, dynamic>,
+            _appSafeData(event.snapshot.value) as Map<String, dynamic>,
           ),
         );
   }
@@ -27,7 +27,8 @@ class FirebaseGameRepository extends GameRepositoryContract {
     final tResult = await FirebaseDatabase.instance
         .ref('games/$gameId')
         .runTransaction((gameJson) {
-      final game = Game.fromJson(gameJson as Map<dynamic, dynamic>);
+      final game =
+          Game.fromJson(_appSafeData(gameJson) as Map<String, dynamic>);
       late Transaction transaction;
 
       try {
@@ -43,5 +44,26 @@ class FirebaseGameRepository extends GameRepositoryContract {
     if (!tResult.committed) {
       throw const FailedToUpdateGameException();
     }
+  }
+
+  static dynamic _appSafeData(dynamic value) {
+    if (value is Map) {
+      return value.map<String, dynamic>(
+        (key, item) => MapEntry(key as String, _appSafeData(item)),
+      );
+    }
+
+    if (value is List) {
+      if (value.isNotEmpty && value.first is Map) {
+        return value
+            .map<Map<String, dynamic>>(
+              (item) => _appSafeData(item) as Map<String, dynamic>,
+            )
+            .toList();
+      }
+      return value;
+    }
+
+    return value;
   }
 }

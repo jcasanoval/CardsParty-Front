@@ -42,7 +42,7 @@ class LobbyScreenCubit extends Cubit<LobbyScreenState> {
     try {
       final currentState = state;
       if (currentState is LobbyLoaded) {
-        final game = Game(id: currentState.lobby.id);
+        final game = Game.fromLobby(currentState.lobby);
         await _gameRepository.createGame(game);
         await _lobbyRepository.updateLobby(currentState.lobby.id, (lobby) {
           lobby.status = LobbyStatus.started;

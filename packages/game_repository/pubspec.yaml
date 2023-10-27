@@ -11,6 +11,8 @@ dependencies:
   firebase_database: ^10.2.5
   flutter:
     sdk: flutter
+  lobby_repository:
+    path: ../lobby_repository
 
 dev_dependencies:
   flutter_test:
