@@ -1,80 +1,27 @@
 {
   "project_info": {
-    "project_number": "894211483765",
-    "firebase_url": "https://cardsparty-dev.firebaseio.com",
-    "project_id": "cardsparty-dev",
-    "storage_bucket": "cardsparty-dev.appspot.com"
+    "project_number": "51250481610",
+    "firebase_url": "https://cardspartydev-default-rtdb.firebaseio.com",
+    "project_id": "cardspartydev",
+    "storage_bucket": "cardspartydev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:894211483765:android:f902d61b1affbb1d16b03c",
-        "android_client_info": {
-          "package_name": "com.cardsparty"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "894211483765-3tjksf52on9mef12tptf31ctiobt38ga.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAS5vzJvT9SK0ALgaI6AdhK-jSYD0_B0xY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "894211483765-3tjksf52on9mef12tptf31ctiobt38ga.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "894211483765-4iku8v82icpanq64ase0tr358hoc6re3.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "a.a"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:894211483765:android:8c0b46f54bc1a3d016b03c",
+        "mobilesdk_app_id": "1:51250481610:android:bc5e4d46879bdbc791e733",
         "android_client_info": {
           "package_name": "com.example.verygoodcore.cards_party"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "894211483765-3tjksf52on9mef12tptf31ctiobt38ga.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAS5vzJvT9SK0ALgaI6AdhK-jSYD0_B0xY"
+          "current_key": "AIzaSyDyiN-Pke0sUzQfMqhF1jowRkcbY0WALv4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "894211483765-3tjksf52on9mef12tptf31ctiobt38ga.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "894211483765-4iku8v82icpanq64ase0tr358hoc6re3.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "a.a"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
