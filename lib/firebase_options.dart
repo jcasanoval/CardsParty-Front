@@ -2,7 +2,7 @@
 // ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+    show TargetPlatform, defaultTargetPlatform, kIsWeb;
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -47,33 +47,32 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCxplFFXEGOwDhtcfKdrvZx3Idj8WSUzLY',
-    appId: '1:894211483765:web:d925e2b47c257cb016b03c',
-    messagingSenderId: '894211483765',
-    projectId: 'cardsparty-dev',
-    authDomain: 'cardsparty-dev.firebaseapp.com',
-    databaseURL: 'https://cardsparty-dev.firebaseio.com',
-    storageBucket: 'cardsparty-dev.appspot.com',
-    measurementId: 'G-MPFFYW9TBC',
+    apiKey: 'AIzaSyCGpL8DTbiwOqs7CV3sru2GcfTBFYHUH6E',
+    appId: '1:51250481610:web:05d9ac7a55c55bdc91e733',
+    messagingSenderId: '51250481610',
+    projectId: 'cardspartydev',
+    authDomain: 'cardspartydev.firebaseapp.com',
+    databaseURL: 'https://cardspartydev-default-rtdb.firebaseio.com',
+    storageBucket: 'cardspartydev.appspot.com',
+    measurementId: 'G-35L2MF34NW',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAS5vzJvT9SK0ALgaI6AdhK-jSYD0_B0xY',
-    appId: '1:894211483765:android:8c0b46f54bc1a3d016b03c',
-    messagingSenderId: '894211483765',
-    projectId: 'cardsparty-dev',
-    databaseURL: 'https://cardsparty-dev.firebaseio.com',
-    storageBucket: 'cardsparty-dev.appspot.com',
+    apiKey: 'AIzaSyDyiN-Pke0sUzQfMqhF1jowRkcbY0WALv4',
+    appId: '1:51250481610:android:bc5e4d46879bdbc791e733',
+    messagingSenderId: '51250481610',
+    projectId: 'cardspartydev',
+    databaseURL: 'https://cardspartydev-default-rtdb.firebaseio.com',
+    storageBucket: 'cardspartydev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDcV5SQPDVx3XSua1t9VxiZHCAmoggTyjM',
-    appId: '1:894211483765:ios:30bea1e0dd4489a616b03c',
-    messagingSenderId: '894211483765',
-    projectId: 'cardsparty-dev',
-    databaseURL: 'https://cardsparty-dev.firebaseio.com',
-    storageBucket: 'cardsparty-dev.appspot.com',
-    iosClientId: '894211483765-h5ovd4h9holkir0u60lj969su88h54pe.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBEFhS_B30cFHa16z-IdJP_JFWmC4bgA4A',
+    appId: '1:51250481610:ios:fbc4e4b03a741f1791e733',
+    messagingSenderId: '51250481610',
+    projectId: 'cardspartydev',
+    databaseURL: 'https://cardspartydev-default-rtdb.firebaseio.com',
+    storageBucket: 'cardspartydev.appspot.com',
     iosBundleId: 'com.example.verygoodcore.cards-party',
   );
 }
