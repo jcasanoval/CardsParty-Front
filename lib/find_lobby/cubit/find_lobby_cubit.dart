@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cards_party/bootstrap.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 import 'package:meta/meta.dart';
@@ -7,14 +6,14 @@ import 'package:meta/meta.dart';
 part 'find_lobby_state.dart';
 
 class FindLobbyCubit extends Cubit<FindLobbyState> {
-  FindLobbyCubit() : super(FindLobbyInitial());
+  FindLobbyCubit(this.lobbyRepository) : super(FindLobbyInitial());
 
-  final _lobbyServices = getIt<LobbyRepositoryContract>();
+  final LobbyRepositoryContract lobbyRepository;
 
   Future<void> createLobby(LobbyPlayer host) async {
     emit(FindLobbyLoading());
     try {
-      final lobby = await _lobbyServices.createLobby(host: host);
+      final lobby = await lobbyRepository.createLobby(host: host);
       emit(LobbyFound(lobbyId: lobby.id));
     } catch (e) {
       emit(FindLobbyError(error: 'Something went wrong'));
@@ -25,7 +24,7 @@ class FindLobbyCubit extends Cubit<FindLobbyState> {
   Future<void> joinByGameCode(String gameCode, LobbyPlayer player) async {
     emit(FindLobbyLoading());
     try {
-      final lobby = await _lobbyServices.joinLobbyByGamecode(gameCode, player);
+      final lobby = await lobbyRepository.joinLobbyByGamecode(gameCode, player);
       emit(LobbyFound(lobbyId: lobby.id));
     } on LobbyNotFoundException {
       emit(FindLobbyError(error: 'Lobby not found'));

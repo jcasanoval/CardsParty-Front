@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cards_party/counter/counter.dart';
 import 'package:cards_party/l10n/l10n.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_repository/game_repository.dart';
 
 @RoutePage()
 class CounterScreen extends StatelessWidget {
@@ -16,7 +17,8 @@ class CounterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CounterCubit()..listenToGame(gameId),
+      create: (context) => CounterCubit(context.read<GameRepositoryContract>())
+        ..listenToGame(gameId),
       child: const CounterView(),
     );
   }
@@ -37,14 +39,14 @@ class CounterView extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().increment(),
-            child: const Icon(Icons.add),
             heroTag: 'add',
+            child: const Icon(Icons.add),
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().decrement(),
-            child: const Icon(Icons.remove),
             heroTag: 'remove',
+            child: const Icon(Icons.remove),
           ),
         ],
       ),

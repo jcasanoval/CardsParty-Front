@@ -1,26 +1,25 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cards_party/bootstrap.dart';
 import 'package:game_repository/game_repository.dart';
 
 class CounterCubit extends Cubit<int> {
-  CounterCubit() : super(0);
+  CounterCubit(this.gameRepository) : super(0);
 
   late final StreamSubscription<Game> _stream;
   late final String _gameId;
 
-  final _gameRepository = getIt<GameRepositoryContract>();
+  final GameRepositoryContract gameRepository;
 
   void listenToGame(String gameId) {
     _gameId = gameId;
-    _stream = _gameRepository.listenToGame(gameId).listen(
+    _stream = gameRepository.listenToGame(gameId).listen(
           (game) => emit(game.customParams['value'] as int? ?? 0),
         );
   }
 
   void increment() {
-    _gameRepository.updateGame(_gameId, (game) {
+    gameRepository.updateGame(_gameId, (game) {
       final value = game.customParams['value'] as int? ?? 0;
       game.customParams['value'] = value + 1;
       return game;
@@ -28,7 +27,7 @@ class CounterCubit extends Cubit<int> {
   }
 
   void decrement() {
-    _gameRepository.updateGame(_gameId, (game) {
+    gameRepository.updateGame(_gameId, (game) {
       final value = game.customParams['value'] as int? ?? 0;
       game.customParams['value'] = value - 1;
       return game;
