@@ -7,13 +7,17 @@ sealed class RulesState extends Equatable {
   List<Object> get props => [];
 }
 
+final class RulesInitial extends RulesState {}
+
 final class RulesLoading extends RulesState {}
 
 final class RulesLoaded extends RulesState {
-  const RulesLoaded(this.ruleset);
+  const RulesLoaded({
+    this.uiElements = const {},
+  });
 
-  final GameRuleset ruleset;
+  final Map<UIElement, GameRuleContract> uiElements;
 
   @override
-  List<Object> get props => [ruleset];
+  List<Object> get props => [uiElements];
 }
