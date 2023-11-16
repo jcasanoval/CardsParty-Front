@@ -1,5 +1,4 @@
 import 'package:cards_party/app/app.dart';
-import 'package:cards_party/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_repository/game_repository.dart';
@@ -37,8 +36,6 @@ class App extends StatelessWidget {
               accentColor: const Color(0xFF13B9FF),
             ),
           ),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: _appRouter.config(),
         ),
       ),
