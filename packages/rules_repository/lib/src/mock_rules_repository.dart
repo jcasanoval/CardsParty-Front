@@ -18,6 +18,7 @@ const mockRuleset = GameRuleset(
   description: 'description',
   rules: [
     MockRule1(),
+    MockRule2(),
   ],
 );
 
@@ -41,6 +42,30 @@ class MockRule1 extends GameRuleContract {
       size: ButtonSize.medium,
       type: ButtonType.rounded,
       enabled: true,
+    );
+  }
+}
+
+class MockRule2 extends GameRuleContract {
+  const MockRule2();
+
+  @override
+  Game applyRule(String userId, Game gameState) {
+    final value = gameState.customParams['hostValue'] as int? ?? 0;
+    gameState.customParams['hostValue'] = value + 1;
+    return gameState;
+  }
+
+  @override
+  UIElement? conditionMet(String userId, Game gameState) {
+    return Button(
+      showButton: true,
+      buttonLabel:
+          'Button pressed ${gameState.customParams['hostValue'] as int? ?? 0} times by host',
+      color: ButtonColor.yellow,
+      size: ButtonSize.medium,
+      type: ButtonType.rounded,
+      enabled: gameState.hostId == userId,
     );
   }
 }
