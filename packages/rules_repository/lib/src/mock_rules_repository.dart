@@ -16,21 +16,23 @@ const mockRuleset = GameRuleset(
   id: 'id',
   name: 'name',
   description: 'description',
-  rules: [MockRule1()],
+  rules: [
+    MockRule1(),
+  ],
 );
 
 class MockRule1 extends GameRuleContract {
   const MockRule1();
 
   @override
-  Game applyRule(int userId, Game gameState) {
+  Game applyRule(String userId, Game gameState) {
     final value = gameState.customParams['value'] as int? ?? 0;
     gameState.customParams['value'] = value + 1;
     return gameState;
   }
 
   @override
-  UIElement? conditionMet(int userId, Game gameState) {
+  UIElement? conditionMet(String userId, Game gameState) {
     return Button(
       showButton: true,
       buttonLabel:
