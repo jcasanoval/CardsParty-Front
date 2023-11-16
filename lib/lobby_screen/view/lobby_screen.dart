@@ -3,6 +3,8 @@ import 'package:cards_party/app/app.dart';
 import 'package:cards_party/lobby_screen/lobby_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_repository/game_repository.dart';
+import 'package:lobby_repository/lobby_repository.dart';
 
 @RoutePage()
 class LobbyScreen extends StatelessWidget {
@@ -16,7 +18,10 @@ class LobbyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LobbyScreenCubit()..loadLobby(lobbyId),
+      create: (context) => LobbyScreenCubit(
+        lobbyRepository: context.read<LobbyRepositoryContract>(),
+        gameRepository: context.read<GameRepositoryContract>(),
+      )..loadLobby(lobbyId),
       child: const LobbyView(),
     );
   }
@@ -46,14 +51,14 @@ class LobbyView extends StatelessWidget {
         body: BlocConsumer<LobbyScreenCubit, LobbyScreenState>(
           listener: (context, state) {
             if (state is GameStarted) {
-              Future.delayed(Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 2), () {
                 context.router.replace(
-                  CounterRoute(
-                    gameId: state.lobby.id,
-                  ),
-                  // GameRoute(
+                  // CounterRoute(
                   //   gameId: state.lobby.id,
                   // ),
+                  GameRoute(
+                    gameId: state.lobby.id,
+                  ),
                 );
               });
             }
@@ -92,7 +97,7 @@ class LobbyView extends StatelessWidget {
 }
 
 class _ConfirmLeaveDialog extends StatelessWidget {
-  const _ConfirmLeaveDialog({super.key});
+  const _ConfirmLeaveDialog();
 
   @override
   Widget build(BuildContext context) {

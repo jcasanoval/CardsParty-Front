@@ -19,7 +19,6 @@ dependencies:
     sdk: flutter
   game_repository:
     path: packages/game_repository
-  get_it: ^7.6.0
   hydrated_bloc: ^9.1.2
   intl: ^0.18.0
   lobby_repository:

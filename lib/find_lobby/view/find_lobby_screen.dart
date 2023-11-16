@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cards_party/app/app.dart';
-import 'package:cards_party/app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:cards_party/find_lobby/find_lobby.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lobby_repository/lobby_repository.dart';
 
 @RoutePage()
 class FindLobbyScreen extends StatelessWidget {
@@ -12,7 +12,8 @@ class FindLobbyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => FindLobbyCubit(),
+      create: (context) =>
+          FindLobbyCubit(context.read<LobbyRepositoryContract>()),
       child: FindLobbyView(),
     );
   }
