@@ -11,7 +11,7 @@ class StartGameButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isHost =
-        context.read<LobbyScreenCubit>().isHost(context.currentUser.id);
+        context.watch<LobbyScreenCubit>().isHost(context.currentUser.id);
     if (isHost) {
       return TextButton(
         child: const Text('Start game'),
