@@ -50,6 +50,9 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
       return lobbyFound;
     }
     await updateLobby(lobbyFound.id, (lobby) {
+      if (lobby.players.any((p) => p.id == player.id)) {
+        return lobby;
+      }
       lobby.players.add(player);
       lobbyFound = lobby;
       return lobby;
