@@ -41,35 +41,38 @@ class GameView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GameEventHandler(
-        child: RulesInitializerHandler(
-          child: BlocBuilder<GameCubit, GameState>(
-            builder: (context, state) {
-              return switch (state) {
-                GameLoading() => const Center(
-                    child: TaggedProgressIndicator(
-                      tag: 'Joining game',
+      body: SafeArea(
+        child: GameEventHandler(
+          child: RulesInitializerHandler(
+            child: BlocBuilder<GameCubit, GameState>(
+              builder: (context, state) {
+                return switch (state) {
+                  GameLoading() => const Center(
+                      child: TaggedProgressIndicator(
+                        tag: 'Joining game',
+                      ),
                     ),
-                  ),
-                GameLoaded() => BlocBuilder<RulesCubit, RulesState>(
-                    builder: (context, state) {
-                      return switch (state) {
-                        RulesLoading() || RulesInitial() => const Center(
-                            child: TaggedProgressIndicator(
-                              tag: 'Loading rules',
+                  GameLoaded() => BlocBuilder<RulesCubit, RulesState>(
+                      builder: (context, state) {
+                        return switch (state) {
+                          RulesLoading() || RulesInitial() => const Center(
+                              child: TaggedProgressIndicator(
+                                tag: 'Loading rules',
+                              ),
                             ),
-                          ),
-                        RulesLoaded() => const Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              ButtonsLayer(),
-                            ],
-                          ),
-                      };
-                    },
-                  ),
-              };
-            },
+                          RulesLoaded() => const Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                PlayerHandsLayer(),
+                                ButtonsLayer(),
+                              ],
+                            ),
+                        };
+                      },
+                    ),
+                };
+              },
+            ),
           ),
         ),
       ),
