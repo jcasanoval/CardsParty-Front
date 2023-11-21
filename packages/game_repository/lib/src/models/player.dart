@@ -7,21 +7,17 @@ const _kName = 'name';
 const _kCards = 'cards';
 
 class Player extends Equatable {
-  Player({
+  const Player({
     required this.id,
     required this.name,
     required this.cards,
-  });
-
-  final String id;
-  final String name;
-
-
-  final List<Card> cards; // Lista de cartas del jugador
+  }); // Lista de cartas del jugador
 
   Player.fromJson(Map<String, dynamic> json)
       : id = json[_kId]! as String,
-        cards = json[_kCards] as List<Card>,
+        cards = (json[_kCards] as List<Map<String, dynamic>>)
+            .map(Card.fromJson)
+            .toList(),
         name = json[_kName]! as String;
 
   Player.fromLobbyPlayer(LobbyPlayer lobbyPlayer)
@@ -29,11 +25,16 @@ class Player extends Equatable {
         name = lobbyPlayer.name,
         cards = [];
 
+  final String id;
+  final String name;
+
+  final List<Card> cards;
+
   Map<String, dynamic> toJson() {
     return {
       _kId: id,
       _kName: name,
-      _kCards: cards,
+      _kCards: cards.map((card) => card.toJson()).toList(),
     };
   }
 
