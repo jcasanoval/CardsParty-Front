@@ -17,6 +17,8 @@ class Game extends Equatable {
     required this.deck,
     required this.discardPile,
     this.customParams = const {},
+    // TODO: make this configurable
+    this.defaultCardVisibility = DefaultCardVisibility.owner,
   });
 
   Game.fromJson(Map<String, dynamic> json)
@@ -53,6 +55,7 @@ class Game extends Equatable {
   final Map<String, dynamic> customParams;
   List<Card> deck;
   List<Card> discardPile;
+  final DefaultCardVisibility defaultCardVisibility;
 
   Map<String, Object> toJson() {
     return {
@@ -67,4 +70,10 @@ class Game extends Equatable {
 
   @override
   List<Object?> get props => [id, players, hostId, customParams];
+}
+
+enum DefaultCardVisibility {
+  owner,
+  all,
+  none,
 }
