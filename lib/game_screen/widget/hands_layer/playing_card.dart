@@ -1,5 +1,7 @@
+import 'package:cards_party/app/app.dart';
 import 'package:cards_party/game_screen/game_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlayingCard extends StatelessWidget {
   const PlayingCard({
@@ -51,7 +53,15 @@ class PlayingCard extends StatelessWidget {
         child: cardWidget,
       ),
       onDragStarted: () {},
-      onDragEnd: (details) {},
+      onDragEnd: (details) {
+        if (details.offset.distance > 100) {
+          context.read<RulesCubit>().executeRule(
+                cardRule.rule,
+                context.read<AuthCubit>().currentUser.id,
+                card,
+              );
+        }
+      },
       child: cardWidget,
     );
   }
