@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:game_repository/game_repository.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 
 const _kId = 'id';
@@ -15,12 +16,12 @@ class Player extends Equatable {
   final String id;
   final String name;
 
-  // TODO(lautaro77): update cards type
-  final List<int?> cards; // Lista de cartas del jugador
+
+  final List<Card> cards; // Lista de cartas del jugador
 
   Player.fromJson(Map<String, dynamic> json)
       : id = json[_kId]! as String,
-        cards = json[_kCards] as List<int>? ?? [],
+        cards = json[_kCards] as List<Card>,
         name = json[_kName]! as String;
 
   Player.fromLobbyPlayer(LobbyPlayer lobbyPlayer)
