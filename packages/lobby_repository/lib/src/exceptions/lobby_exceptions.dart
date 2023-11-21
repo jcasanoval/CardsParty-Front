@@ -10,3 +10,7 @@ sealed class LobbyException implements Exception {
 final class LobbyNotFoundException extends LobbyException {
   const LobbyNotFoundException() : super('Lobby not found');
 }
+
+final class LobbyFullException extends LobbyException {
+  const LobbyFullException() : super('Lobby is full');
+}

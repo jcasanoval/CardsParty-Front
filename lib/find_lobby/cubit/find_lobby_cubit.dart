@@ -29,6 +29,9 @@ class FindLobbyCubit extends Cubit<FindLobbyState> {
     } on LobbyNotFoundException {
       emit(FindLobbyError(error: 'Lobby not found'));
       emit(FindLobbyInitial());
+    } on LobbyFullException {
+      emit(FindLobbyError(error: 'Lobby is full'));
+      emit(FindLobbyInitial());
     } catch (e) {
       emit(FindLobbyError(error: 'Something went wrong'));
       emit(FindLobbyInitial());
