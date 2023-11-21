@@ -22,19 +22,20 @@ class Game extends Equatable {
   Game.fromJson(Map<String, dynamic> json)
       : this(
           id: json[_kId] as String,
-          players: (json[_kPlayers] as List<Map<String, dynamic>>)
+          players: (json[_kPlayers] as List<Map<String, dynamic>>? ?? [])
               .map(Player.fromJson)
               .toList(),
           customParams: json.containsKey(_kCustomParams)
               ? json[_kCustomParams] as Map<String, dynamic>
               : {},
           hostId: json[_kHostId] as String,
-          deck: (json[_kDeck] as List<Map<String, dynamic>>)
+          deck: (json[_kDeck] as List<Map<String, dynamic>>? ?? [])
               .map(Card.fromJson)
               .toList(),
-          discardPile: (json[_kDiscardPile] as List<Map<String, dynamic>>)
-              .map(Card.fromJson)
-              .toList(),
+          discardPile:
+              (json[_kDiscardPile] as List<Map<String, dynamic>>? ?? [])
+                  .map(Card.fromJson)
+                  .toList(),
         );
 
   Game.fromLobby(Lobby lobby)
