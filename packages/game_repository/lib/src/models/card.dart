@@ -10,10 +10,10 @@ class Card extends Equatable {
   });
 
   Card.fromJson(Map<String, dynamic> json)
-      : number = json[_kNumber]! as int,
+      : number = json[_kNumber]! as String,
         suit = Suit.fromKey(json[_kSuit] as String);
 
-  final int number;
+  final String number;
   final Suit suit;
 
   Map<String, dynamic> toJson() {

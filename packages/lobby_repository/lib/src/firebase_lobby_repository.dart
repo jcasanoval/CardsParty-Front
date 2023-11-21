@@ -53,6 +53,9 @@ class FirebaseLobbyRepository extends LobbyRepositoryContract {
       if (lobby.players.any((p) => p.id == player.id)) {
         return lobby;
       }
+      if (lobby.players.length >= 4) {
+        throw const LobbyFullException();
+      }
       lobby.players.add(player);
       lobbyFound = lobby;
       return lobby;

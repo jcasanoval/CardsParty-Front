@@ -17,24 +17,27 @@ class Game extends Equatable {
     required this.deck,
     required this.discardPile,
     this.customParams = const {},
+    // TODO: make this configurable
+    this.defaultCardVisibility = DefaultCardVisibility.owner,
   });
 
   Game.fromJson(Map<String, dynamic> json)
       : this(
           id: json[_kId] as String,
-          players: (json[_kPlayers] as List<Map<String, dynamic>>)
+          players: (json[_kPlayers] as List<Map<String, dynamic>>? ?? [])
               .map(Player.fromJson)
               .toList(),
           customParams: json.containsKey(_kCustomParams)
               ? json[_kCustomParams] as Map<String, dynamic>
               : {},
           hostId: json[_kHostId] as String,
-          deck: (json[_kDeck] as List<Map<String, dynamic>>)
+          deck: (json[_kDeck] as List<Map<String, dynamic>>? ?? [])
               .map(Card.fromJson)
               .toList(),
-          discardPile: (json[_kDiscardPile] as List<Map<String, dynamic>>)
-              .map(Card.fromJson)
-              .toList(),
+          discardPile:
+              (json[_kDiscardPile] as List<Map<String, dynamic>>? ?? [])
+                  .map(Card.fromJson)
+                  .toList(),
         );
 
   Game.fromLobby(Lobby lobby)
@@ -52,6 +55,7 @@ class Game extends Equatable {
   final Map<String, dynamic> customParams;
   List<Card> deck;
   List<Card> discardPile;
+  final DefaultCardVisibility defaultCardVisibility;
 
   Map<String, Object> toJson() {
     return {
@@ -66,4 +70,10 @@ class Game extends Equatable {
 
   @override
   List<Object?> get props => [id, players, hostId, customParams];
+}
+
+enum DefaultCardVisibility {
+  owner,
+  all,
+  none,
 }

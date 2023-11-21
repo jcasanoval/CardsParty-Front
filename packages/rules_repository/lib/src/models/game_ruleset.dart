@@ -14,5 +14,5 @@ class GameRuleset {
 
   final String description;
 
-  final List<GameRuleContract> rules;
+  final List<RuleContract> rules;
 }
