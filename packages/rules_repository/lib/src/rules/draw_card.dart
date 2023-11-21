@@ -9,7 +9,7 @@ class DrawCard extends GameRuleContract {
   @override
   Game applyRule(String userId, Game gameState) {
     final card = Card(
-      number: Random().nextInt(11),
+      number: Random().nextInt(12) + 1,
       suit: Suit.values[Random().nextInt(4)],
     );
     final player =

@@ -25,6 +25,6 @@ class DiscardOnDragRule extends CardRuleContract {
         .contains(card)) {
       return Drag(enabled: true);
     }
-    return null;
+    return Drag(enabled: false);
   }
 }
