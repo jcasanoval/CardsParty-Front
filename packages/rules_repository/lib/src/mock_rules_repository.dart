@@ -17,8 +17,10 @@ const mockRuleset = GameRuleset(
   name: 'name',
   description: 'description',
   rules: [
-    MockRule1(),
-    MockRule2(),
+    // MockRule1(),
+    // MockRule2(),
+    DrawCard(),
+    DiscardOnDragRule(),
   ],
 );
 
