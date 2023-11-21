@@ -10,11 +10,11 @@ class Card extends Equatable {
   });
 
   final int number;
-  final String suit;
+  final Suite suit;
 
   Card.fromJson(Map<String, dynamic> json)
       : number = json[_kNumber]! as int,
-        suit = json[_kSuit] as String;
+        suit = json[_kSuit] as Suite;
 
   Map<String, dynamic> toJson() {
     return {
@@ -25,4 +25,12 @@ class Card extends Equatable {
 
   @override
   List<Object?> get props => [number, suit];
+}
+
+
+enum Suite {
+  gold,
+  cup,
+  sword,
+  coarse,
 }
