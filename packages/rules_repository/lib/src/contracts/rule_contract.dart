@@ -1,4 +1,5 @@
 abstract class RuleContract {
-  final int priority;
   const RuleContract({this.priority = 0});
+
+  final int priority;
 }
