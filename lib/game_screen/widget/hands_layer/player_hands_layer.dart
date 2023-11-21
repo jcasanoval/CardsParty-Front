@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cards_party/app/app.dart';
 import 'package:cards_party/game_screen/game_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +29,7 @@ class PlayerHandsLayer extends StatelessWidget {
             top: 0,
             child: PlayerHand(
               player: players.length == 2 ? players[1] : players[2],
-              rotation: pi,
+              quarterTurns: 2,
               rotateText: true,
             ),
           ),
@@ -40,7 +38,7 @@ class PlayerHandsLayer extends StatelessWidget {
             left: 0,
             child: PlayerHand(
               player: players.length == 3 ? players[2] : players[3],
-              rotation: pi / 2,
+              quarterTurns: 1,
             ),
           ),
         if (players.length == 3 || players.length == 4)
@@ -48,7 +46,7 @@ class PlayerHandsLayer extends StatelessWidget {
             right: 0,
             child: PlayerHand(
               player: players[1],
-              rotation: pi * 3 / 2,
+              quarterTurns: 3,
             ),
           ),
       ],
