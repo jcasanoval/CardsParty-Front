@@ -47,7 +47,7 @@ class RulesCubit extends Cubit<RulesState> {
         highestPriority = rule.priority;
       }
     }
-    emit(RulesLoaded(uiElements: uiElements));
+    emit(RulesLoaded(uiElements: uiElements, cardRules: cardActions));
   }
 
   /// Returns true if the rule was enabled and added to the list of UIElements
