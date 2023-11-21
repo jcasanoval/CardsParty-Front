@@ -42,7 +42,7 @@ class Game extends Equatable {
           id: lobby.id,
           players: lobby.players.map(Player.fromLobbyPlayer).toList(),
           hostId: lobby.hostId,
-          deck: [],
+          deck: [const Card(number: 3, suit: Suit.heart)],
           discardPile: [],
         );
 
@@ -59,6 +59,8 @@ class Game extends Equatable {
       _kPlayers: players.map((player) => player.toJson()).toList(),
       _kCustomParams: customParams,
       _kHostId: hostId,
+      _kDeck: deck.map((card) => card.toJson()).toList(),
+      _kDiscardPile: discardPile.map((card) => card.toJson()).toList(),
     };
   }
 
