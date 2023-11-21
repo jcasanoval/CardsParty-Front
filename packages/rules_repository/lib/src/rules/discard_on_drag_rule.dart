@@ -2,7 +2,7 @@ import 'package:game_repository/game_repository.dart';
 import 'package:rules_repository/rules_repository.dart';
 
 class DiscardOnDragRule extends CardRuleContract {
-  const DiscardOnDragRule() : super(priority: 1);
+  const DiscardOnDragRule() : super(priority: 0);
 
   @override
   Game applyRule(String userId, Game gameState, Card card) {
