@@ -40,6 +40,10 @@ class PlayingCard extends StatelessWidget {
       ),
     );
 
+    if (!cardRule.result.enabled) {
+      return cardWidget;
+    }
+
     return Draggable(
       feedback: Transform.rotate(
         angle: 0.1 + parentRotation,
