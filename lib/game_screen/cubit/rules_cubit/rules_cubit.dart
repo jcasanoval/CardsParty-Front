@@ -29,11 +29,13 @@ class RulesCubit extends Cubit<RulesState> {
     final uiElements = <UIElement, GameRuleContract>{};
     for (final rule in _ruleset.rules) {
       if (highestPriority == null || highestPriority == rule.priority) {
-        final result = rule.conditionMet(userId, gameState);
-        if (result != null) {
-          uiElements[result] = rule;
-          if (result.enabled) {
-            highestPriority = rule.priority;
+        if (rule is GameRuleContract) {
+          final result = rule.conditionMet(userId, gameState);
+          if (result != null) {
+            uiElements[result] = rule;
+            if (result.enabled) {
+              highestPriority = rule.priority;
+            }
           }
         }
       }
