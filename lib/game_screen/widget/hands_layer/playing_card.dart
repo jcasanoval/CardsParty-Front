@@ -1,9 +1,12 @@
-import 'dart:math';
-
+import 'package:cards_party/game_screen/game_screen.dart';
 import 'package:flutter/material.dart';
 
 class PlayingCard extends StatelessWidget {
-  const PlayingCard({super.key, this.parentRotation = 0});
+  const PlayingCard({
+    required this.cardRule,
+    super.key,
+    this.parentRotation = 0,
+  });
 
   static const double width = 57.1;
 
@@ -11,25 +14,11 @@ class PlayingCard extends StatelessWidget {
 
   final double parentRotation;
 
-  static const suits = ['♥', '♠', '♦', '♣'];
-  static const values = [
-    'A',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    'J',
-    'Q',
-    'K',
-  ];
+  final CardRuleWrapper cardRule;
 
   @override
   Widget build(BuildContext context) {
+    final card = cardRule.card;
     final cardWidget = DefaultTextStyle(
       style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.black),
       child: Container(
@@ -42,8 +31,7 @@ class PlayingCard extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            // TODO(jacasanoval): Replace with card data
-            '${values.ran}\n${suits.ran}',
+            '${card.number}\n${card.suit.charIcon}',
             textAlign: TextAlign.center,
           ),
         ),
@@ -67,8 +55,4 @@ class PlayingCard extends StatelessWidget {
       child: cardWidget,
     );
   }
-}
-
-extension RandomList<T> on List<T> {
-  T get ran => this[Random().nextInt(length)];
 }
