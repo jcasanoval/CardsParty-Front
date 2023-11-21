@@ -4,22 +4,22 @@ const _kNumber = 'number';
 const _kSuit = 'suit';
 
 class Card extends Equatable {
-  Card({
+  const Card({
     required this.number,
     required this.suit,
   });
 
-  final int number;
-  final Suite suit;
-
   Card.fromJson(Map<String, dynamic> json)
       : number = json[_kNumber]! as int,
-        suit = json[_kSuit] as Suite;
+        suit = Suit.fromKey(json[_kSuit] as String);
+
+  final int number;
+  final Suit suit;
 
   Map<String, dynamic> toJson() {
     return {
       _kNumber: number,
-      _kSuit: suit,
+      _kSuit: suit.key,
     };
   }
 
@@ -27,10 +27,18 @@ class Card extends Equatable {
   List<Object?> get props => [number, suit];
 }
 
+enum Suit {
+  club('club', '♣'),
+  diamond('diamond', '♦'),
+  heart('heart', '♥'),
+  spade('spade', '♠');
 
-enum Suite {
-  gold,
-  cup,
-  sword,
-  coarse,
+  const Suit(this.key, this.charIcon);
+
+  final String key;
+  final String charIcon;
+
+  static Suit fromKey(String key) {
+    return Suit.values.firstWhere((element) => element.key == key);
+  }
 }
