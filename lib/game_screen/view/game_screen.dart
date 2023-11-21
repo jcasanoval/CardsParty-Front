@@ -60,7 +60,7 @@ class GameView extends StatelessWidget {
                                 tag: 'Loading rules',
                               ),
                             ),
-                          RulesLoaded() => const Stack(
+                          _ => const Stack(
                               fit: StackFit.expand,
                               children: [
                                 PlayerHandsLayer(),

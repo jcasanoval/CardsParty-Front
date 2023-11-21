@@ -16,22 +16,22 @@ class ButtonsLayer extends StatelessWidget {
         }
 
         final buttons =
-            filterByType<UIElement, Button, GameRuleContract>(state.uiElements);
+            state.uiElements.whereType<GameRuleWrapper<Button>>().toList();
 
         return Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: buttons.entries
+            children: buttons
                 .map(
-                  (entry) => ElevatedButton(
-                    onPressed: entry.key.enabled
+                  (wrapper) => ElevatedButton(
+                    onPressed: wrapper.result.enabled
                         ? () => context.read<RulesCubit>().executeRule(
-                              entry.value,
+                              wrapper.rule,
                               context.read<AuthCubit>().currentUser.id,
                             )
                         : null,
                     child: Text(
-                      entry.key.buttonLabel,
+                      wrapper.result.buttonLabel,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ),
@@ -42,12 +42,4 @@ class ButtonsLayer extends StatelessWidget {
       },
     );
   }
-}
-
-Map<T, V> filterByType<K, T extends K, V>(Map<K, V> map) {
-  return Map<T, V>.fromEntries(
-    map.entries
-        .where((entry) => entry.key is T)
-        .map((entry) => MapEntry<T, V>(entry.key as T, entry.value)),
-  );
 }
