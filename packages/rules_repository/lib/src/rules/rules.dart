@@ -1,2 +1,2 @@
-export 'discard_on_drag_rule.dart';
-export 'draw_card.dart';
+export 'chancho/chancho.dart';
+export 'discard_draw/discard_draw.dart';
