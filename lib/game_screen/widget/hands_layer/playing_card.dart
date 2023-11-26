@@ -55,7 +55,7 @@ class _PlayingCardState extends State<PlayingCard> {
         ),
         child: Center(
           child: Text(
-            '${card.number}\n${card.suit.charIcon}',
+            '${card.number.charIcon}\n${card.suit.charIcon}',
             textAlign: TextAlign.center,
           ),
         ),
@@ -99,5 +99,22 @@ class _PlayingCardState extends State<PlayingCard> {
       },
       child: cardWidget,
     );
+  }
+}
+
+extension CardValue on int {
+  String get charIcon {
+    switch (this) {
+      case 1:
+        return 'A';
+      case 11:
+        return 'J';
+      case 12:
+        return 'Q';
+      case 13:
+        return 'K';
+      default:
+        return toString();
+    }
   }
 }

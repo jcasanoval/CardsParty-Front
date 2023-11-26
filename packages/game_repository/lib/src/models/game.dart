@@ -69,7 +69,15 @@ class Game extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, players, hostId, customParams];
+  List<Object?> get props => [
+        id,
+        players,
+        hostId,
+        customParams,
+        deck,
+        discardPile,
+        defaultCardVisibility
+      ];
 }
 
 enum DefaultCardVisibility {
