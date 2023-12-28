@@ -8,5 +8,5 @@ abstract class Expression {
   const Expression();
 
   /// Evaluates the Expression and modifies the provided game and context.
-  void evaluate(Game game, Map<String, dynamic> context);
+  void evaluate(Game game, String userId, Map<String, dynamic> context);
 }
