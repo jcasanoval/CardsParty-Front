@@ -2,3 +2,4 @@
 library rule_interpreter;
 
 export 'src/contracts/contracts.dart';
+export 'src/models/models.dart';
