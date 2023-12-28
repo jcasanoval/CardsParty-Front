@@ -12,7 +12,7 @@ class LiteralStm<T> extends Statement<T> {
   final T value;
 
   @override
-  T evaluate(Game game, Map<String, dynamic> context) {
+  T evaluate(Game game, String userId, Map<String, dynamic> context) {
     return value;
   }
 }
