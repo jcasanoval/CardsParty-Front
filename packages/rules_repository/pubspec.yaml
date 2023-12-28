@@ -14,6 +14,8 @@ dependencies:
     path: ../game_repository
   lobby_repository:
     path: ../lobby_repository
+  rule_interpreter:
+    path: ../rule_interpreter
 
 dev_dependencies:
   flutter_test:
