@@ -23,6 +23,10 @@ class IfExp extends Expression {
 
   @override
   void evaluate(Game game, String userId, Context context) {
+    if (context.returned) {
+      return;
+    }
+
     if (condition.evaluate(game, userId, context)) {
       then.evaluate(game, userId, context);
     } else {
