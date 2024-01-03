@@ -20,9 +20,9 @@ class VariableStm<T> extends Statement<T> {
 
   // TODO(jcasanoval): Implement access to non custom params
   @override
-  T evaluate(Game game, String userId, Map<String, dynamic> context) {
+  T evaluate(Game game, String userId, Context context) {
     if (!name.contains('.')) {
-      return context[name] as T;
+      return context.getVariable<T>(name);
     }
 
     final parts = name.split('.');
