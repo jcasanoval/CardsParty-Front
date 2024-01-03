@@ -11,6 +11,9 @@ class Context {
   /// The return value of the rule.
   dynamic returnValue;
 
+  /// Whether or not the rule has returned.
+  bool returned = false;
+
   /// Sets a variable in the context.
   void setVariable(String key, dynamic value) {
     _data[key] = value;
