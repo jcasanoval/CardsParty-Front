@@ -9,7 +9,11 @@ const _kHostId = 'hostId';
 const _kDeck = 'deck';
 const _kDiscardPile = 'discardPile';
 
+/// {@template game}
+/// A Game.
+/// {@endtemplate}
 class Game extends Equatable {
+  /// {@macro game}
   Game({
     required this.id,
     required this.players,
@@ -17,10 +21,10 @@ class Game extends Equatable {
     required this.deck,
     required this.discardPile,
     this.customParams = const {},
-    // TODO: make this configurable
     this.defaultCardVisibility = DefaultCardVisibility.owner,
   });
 
+  /// Creates a [Game] from a json object.
   Game.fromJson(Map<String, dynamic> json)
       : this(
           id: json[_kId] as String,
@@ -40,6 +44,7 @@ class Game extends Equatable {
                   .toList(),
         );
 
+  /// Creates a [Game] from a [Lobby].
   Game.fromLobby(Lobby lobby)
       : this(
           id: lobby.id,
@@ -57,6 +62,7 @@ class Game extends Equatable {
   List<Card> discardPile;
   final DefaultCardVisibility defaultCardVisibility;
 
+  /// Returns a json representation of the game.
   Map<String, Object> toJson() {
     return {
       _kId: id,
@@ -68,6 +74,24 @@ class Game extends Equatable {
     };
   }
 
+  /// Returns the value of the given key. If the key is not found, returns null.
+  dynamic getProperty(String key) {
+    switch (key) {
+      case _kId:
+        return id;
+      case _kPlayers:
+        return players;
+      case _kHostId:
+        return hostId;
+      case _kDeck:
+        return deck;
+      case _kDiscardPile:
+        return discardPile;
+      default:
+        return customParams[key];
+    }
+  }
+
   @override
   List<Object?> get props => [
         id,
@@ -76,12 +100,6 @@ class Game extends Equatable {
         customParams,
         deck,
         discardPile,
-        defaultCardVisibility
+        defaultCardVisibility,
       ];
-}
-
-enum DefaultCardVisibility {
-  owner,
-  all,
-  none,
 }
