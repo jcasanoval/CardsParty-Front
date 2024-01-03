@@ -27,7 +27,7 @@ class VariableStm<T> extends Statement<T> {
 
     final parts = name.split('.');
     if (parts[0] == 'game') {
-      return game.customParams[parts[1]] as T;
+      return game.getProperty(parts[1]) as T;
     }
 
     if (parts[0] == 'currentPlayer') {
