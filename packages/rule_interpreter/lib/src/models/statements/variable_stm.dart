@@ -18,7 +18,6 @@ class VariableStm<T> extends Statement<T> {
   /// If the variable has not been set, an exception will be thrown.
   final String name;
 
-  // TODO(jcasanoval): Implement access to non custom params
   @override
   T evaluate(Game game, String userId, Context context) {
     if (!name.contains('.')) {
@@ -32,7 +31,7 @@ class VariableStm<T> extends Statement<T> {
 
     if (parts[0] == 'currentPlayer') {
       final player = game.players.firstWhere((player) => player.id == userId);
-      return player.customParams[parts[1]] as T;
+      return player.getProperty(parts[1]) as T;
     }
 
     if (parts[0].contains('players')) {
@@ -47,7 +46,7 @@ class VariableStm<T> extends Statement<T> {
       }
 
       final player = game.players[parsedIndex];
-      return player.customParams[parts[1]] as T;
+      return player.getProperty(parts[1]) as T;
     }
 
     throw Exception('Invalid variable name: $name');
