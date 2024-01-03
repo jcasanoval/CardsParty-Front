@@ -7,7 +7,11 @@ const _kName = 'name';
 const _kCards = 'cards';
 const _kCustomParams = 'customParams';
 
+/// {@template player}
+/// A Player.
+/// {@endtemplate}
 class Player extends Equatable {
+  /// {@macro player}
   const Player({
     required this.id,
     required this.name,
@@ -15,6 +19,7 @@ class Player extends Equatable {
     this.customParams = const {},
   }); // Lista de cartas del jugador
 
+  /// Creates a [Player] from a json object.
   Player.fromJson(Map<String, dynamic> json)
       : id = json[_kId]! as String,
         cards = (json[_kCards] as List<Map<String, dynamic>>? ?? [])
@@ -25,18 +30,26 @@ class Player extends Equatable {
             : {},
         name = json[_kName]! as String;
 
+  /// Creates a [Player] from a [LobbyPlayer].
   Player.fromLobbyPlayer(LobbyPlayer lobbyPlayer)
       : id = lobbyPlayer.id,
         name = lobbyPlayer.name,
         customParams = {},
         cards = [];
 
+  /// The id of the player.
   final String id;
+
+  /// The name of the player.
   final String name;
+
+  /// The custom parameters of the player.
   final Map<String, dynamic> customParams;
 
+  /// The players hand.
   final List<Card> cards;
 
+  /// Creates a json object from a [Player].
   Map<String, dynamic> toJson() {
     return {
       _kId: id,
@@ -44,6 +57,20 @@ class Player extends Equatable {
       _kCards: cards.map((card) => card.toJson()).toList(),
       _kCustomParams: customParams,
     };
+  }
+
+  /// Gets a property from the player.
+  dynamic getProperty(String key) {
+    switch (key) {
+      case _kId:
+        return id;
+      case _kName:
+        return name;
+      case _kCards:
+        return cards;
+      default:
+        return customParams[key];
+    }
   }
 
   @override

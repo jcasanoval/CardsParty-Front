@@ -54,12 +54,25 @@ class Game extends Equatable {
           discardPile: [],
         );
 
+  /// The id of the game.
   final String id;
+
+  /// The list of players in the game.
   final List<Player> players;
+
+  /// The id of the host of the game.
   final String hostId;
+
+  /// The custom parameters of the game.
   final Map<String, dynamic> customParams;
+
+  /// The deck of the game.
   List<Card> deck;
+
+  /// The discard pile of the game.
   List<Card> discardPile;
+
+  /// The default visibility of cards in the game.
   final DefaultCardVisibility defaultCardVisibility;
 
   /// Returns a json representation of the game.
