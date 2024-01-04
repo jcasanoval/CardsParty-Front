@@ -2,7 +2,7 @@ import 'package:game_repository/src/models/game.dart';
 import 'package:rules_repository/rules_repository.dart';
 
 class ChanchoRule extends GameRuleContract {
-  const ChanchoRule() : super(priority: 0);
+  const ChanchoRule() : super(priority: 1);
 
   @override
   Game applyRule(String userId, Game gameState) {

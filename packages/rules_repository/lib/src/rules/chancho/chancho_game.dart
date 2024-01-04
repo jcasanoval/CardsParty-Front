@@ -5,7 +5,9 @@ const chanchoGame = GameRuleset(
   name: 'Chancho Va!',
   description: 'A game of Chancho Va!',
   rules: [
-    DealCardsRule(),
+    SetupChanchoRule(),
+    // DealCardsRule(),
+    dealCardsCustomRule,
     ChanchoRule(),
     PassCardRule(),
   ],
