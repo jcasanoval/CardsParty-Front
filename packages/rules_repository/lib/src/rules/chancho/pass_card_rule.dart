@@ -2,7 +2,7 @@ import 'package:game_repository/game_repository.dart';
 import 'package:rules_repository/rules_repository.dart';
 
 class PassCardRule extends CardRuleContract {
-  const PassCardRule() : super(priority: 1);
+  const PassCardRule() : super(priority: 2);
 
   @override
   Game applyRule(String userId, Game gameState, Card card) {
