@@ -7,13 +7,16 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@endtemplate}
 class HasCardStm extends Statement<bool> {
   /// {@macro has_card_stm}
-  const HasCardStm();
+  const HasCardStm({
+    this.cardStm = const CurrentCardStm(),
+  });
+
+  /// The card to check if the player has.
+  final Statement<Card> cardStm;
 
   @override
   bool evaluate(Game game, String userId, Context context, [Card? card]) {
-    if (card == null) return false;
-
     final player = game.players.firstWhere((player) => player.id == userId);
-    return player.cards.contains(card);
+    return player.cards.contains(cardStm.evaluate(game, userId, context, card));
   }
 }
