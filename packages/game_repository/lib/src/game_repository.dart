@@ -61,6 +61,13 @@ class FirebaseGameRepository extends GameRepositoryContract {
             )
             .toList();
       }
+      if (value.isNotEmpty && value.first is String) {
+        return value
+            .map<String>(
+              (item) => item as String,
+            )
+            .toList();
+      }
       return value;
     }
 
