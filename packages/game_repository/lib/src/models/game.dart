@@ -35,13 +35,12 @@ class Game extends Equatable {
               ? json[_kCustomParams] as Map<String, dynamic>
               : {},
           hostId: json[_kHostId] as String,
-          deck: (json[_kDeck] as List<Map<String, dynamic>>? ?? [])
-              .map(Card.fromJson)
+          deck: (json[_kDeck] as List<String>? ?? [])
+              .map(Card.fromString)
               .toList(),
-          discardPile:
-              (json[_kDiscardPile] as List<Map<String, dynamic>>? ?? [])
-                  .map(Card.fromJson)
-                  .toList(),
+          discardPile: (json[_kDiscardPile] as List<String>? ?? [])
+              .map(Card.fromString)
+              .toList(),
         );
 
   /// Creates a [Game] from a [Lobby].
@@ -82,8 +81,8 @@ class Game extends Equatable {
       _kPlayers: players.map((player) => player.toJson()).toList(),
       _kCustomParams: customParams,
       _kHostId: hostId,
-      _kDeck: deck.map((card) => card.toJson()).toList(),
-      _kDiscardPile: discardPile.map((card) => card.toJson()).toList(),
+      _kDeck: deck.map((card) => card.toString()).toList(),
+      _kDiscardPile: discardPile.map((card) => card.toString()).toList(),
     };
   }
 
