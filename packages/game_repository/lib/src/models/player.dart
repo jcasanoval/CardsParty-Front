@@ -22,8 +22,8 @@ class Player extends Equatable {
   /// Creates a [Player] from a json object.
   Player.fromJson(Map<String, dynamic> json)
       : id = json[_kId]! as String,
-        cards = (json[_kCards] as List<Map<String, dynamic>>? ?? [])
-            .map(Card.fromJson)
+        cards = (json[_kCards] as List<String>? ?? [])
+            .map(Card.fromString)
             .toList(),
         customParams = json.containsKey(_kCustomParams)
             ? json[_kCustomParams] as Map<String, dynamic>
@@ -54,7 +54,7 @@ class Player extends Equatable {
     return {
       _kId: id,
       _kName: name,
-      _kCards: cards.map((card) => card.toJson()).toList(),
+      _kCards: cards.map((card) => card.toString()).toList(),
       _kCustomParams: customParams,
     };
   }

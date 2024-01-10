@@ -9,18 +9,16 @@ class Card extends Equatable {
     required this.suit,
   });
 
-  Card.fromJson(Map<String, dynamic> json)
-      : number = json[_kNumber]! as int,
-        suit = Suit.fromKey(json[_kSuit] as String);
+  Card.fromString(String cardString)
+      : number = int.parse(cardString.split('-')[0]),
+        suit = Suit.fromKey(cardString.split('-')[1]);
 
   final int number;
   final Suit suit;
 
-  Map<String, dynamic> toJson() {
-    return {
-      _kNumber: number,
-      _kSuit: suit.key,
-    };
+  @override
+  String toString() {
+    return '$number-${suit.key}';
   }
 
   @override
