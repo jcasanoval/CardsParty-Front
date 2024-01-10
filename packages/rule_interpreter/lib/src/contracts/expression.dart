@@ -9,5 +9,5 @@ abstract class Expression {
   const Expression();
 
   /// Evaluates the Expression and modifies the provided game and context.
-  void evaluate(Game game, String userId, Context context);
+  void evaluate(Game game, String userId, Context context, [Card? card]);
 }

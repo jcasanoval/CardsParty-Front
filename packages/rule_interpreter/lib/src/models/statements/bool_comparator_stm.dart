@@ -18,7 +18,7 @@ class BoolComparatorStm extends Statement<bool> {
   final Statement<dynamic> right;
 
   @override
-  bool evaluate(Game game, String userId, Context context) {
+  bool evaluate(Game game, String userId, Context context, [Card? card]) {
     final leftValue = left.evaluate(game, userId, context);
     final rightValue = right.evaluate(game, userId, context);
 
