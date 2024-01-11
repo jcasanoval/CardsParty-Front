@@ -20,23 +20,27 @@ class SetVariableExp extends Expression {
   final Statement<dynamic> value;
 
   @override
-  void evaluate(Game game, String userId, Context context, [Card? card]) {
+  void evaluate(Game game, String userId, Context context, Card? card) {
     if (context.returned) {
       return;
     }
 
     if (!variableName.contains('.')) {
-      context.setVariable(variableName, value.evaluate(game, userId, context));
+      context.setVariable(
+        variableName,
+        value.evaluate(game, userId, context, card),
+      );
     }
 
     final parts = variableName.split('.');
     if (parts[0] == 'game') {
-      game.customParams[parts[1]] = value.evaluate(game, userId, context);
+      game.customParams[parts[1]] = value.evaluate(game, userId, context, card);
     }
 
     if (parts[0] == 'currentPlayer') {
       final player = game.players.firstWhere((player) => player.id == userId);
-      player.customParams[parts[1]] = value.evaluate(game, userId, context);
+      player.customParams[parts[1]] =
+          value.evaluate(game, userId, context, card);
     }
 
     if (parts[0].contains('players')) {
@@ -51,7 +55,8 @@ class SetVariableExp extends Expression {
       }
 
       final player = game.players[parsedIndex];
-      player.customParams[parts[1]] = value.evaluate(game, userId, context);
+      player.customParams[parts[1]] =
+          value.evaluate(game, userId, context, card);
     }
   }
 }

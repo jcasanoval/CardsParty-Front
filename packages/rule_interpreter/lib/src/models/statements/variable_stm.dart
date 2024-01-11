@@ -19,7 +19,7 @@ class VariableStm<T> extends Statement<T> {
   final String name;
 
   @override
-  T evaluate(Game game, String userId, Context context, [Card? card]) {
+  T evaluate(Game game, String userId, Context context, Card? card) {
     if (!name.contains('.')) {
       return context.getVariable<T>(name);
     }

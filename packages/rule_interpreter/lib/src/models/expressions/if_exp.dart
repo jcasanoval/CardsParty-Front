@@ -22,15 +22,15 @@ class IfExp extends Expression {
   final Expression? otherwise;
 
   @override
-  void evaluate(Game game, String userId, Context context, [Card? card]) {
+  void evaluate(Game game, String userId, Context context, Card? card) {
     if (context.returned) {
       return;
     }
 
-    if (condition.evaluate(game, userId, context)) {
-      then.evaluate(game, userId, context);
+    if (condition.evaluate(game, userId, context, card)) {
+      then.evaluate(game, userId, context, card);
     } else {
-      otherwise?.evaluate(game, userId, context);
+      otherwise?.evaluate(game, userId, context, card);
     }
   }
 }

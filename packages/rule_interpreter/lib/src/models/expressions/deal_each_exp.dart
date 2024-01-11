@@ -12,8 +12,8 @@ class DealEachExp extends Expression {
   final Statement<int> amount;
 
   @override
-  void evaluate(Game game, String userId, Context context, [Card? card]) {
-    final amount = this.amount.evaluate(game, userId, context);
+  void evaluate(Game game, String userId, Context context, Card? card) {
+    final amount = this.amount.evaluate(game, userId, context, card);
     for (final player in game.players) {
       for (var i = 0; i < amount; i++) {
         player.cards.add(game.deck.removeAt(0));

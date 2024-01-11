@@ -15,7 +15,7 @@ class HasCardStm extends Statement<bool> {
   final Statement<Card> cardStm;
 
   @override
-  bool evaluate(Game game, String userId, Context context, [Card? card]) {
+  bool evaluate(Game game, String userId, Context context, Card? card) {
     final player = game.players.firstWhere((player) => player.id == userId);
     return player.cards.contains(cardStm.evaluate(game, userId, context, card));
   }

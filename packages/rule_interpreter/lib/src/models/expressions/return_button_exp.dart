@@ -35,16 +35,16 @@ class ReturnButtonExp extends Expression {
   final ButtonType type;
 
   @override
-  void evaluate(Game game, String userId, Context context, [Card? card]) {
+  void evaluate(Game game, String userId, Context context, Card? card) {
     if (context.returned) {
       return;
     }
 
     final button = Button(
-      buttonLabel: buttonLabel.evaluate(game, userId, context),
+      buttonLabel: buttonLabel.evaluate(game, userId, context, card),
       color: color,
-      enabled: enabled.evaluate(game, userId, context),
-      showButton: showButton.evaluate(game, userId, context),
+      enabled: enabled.evaluate(game, userId, context, card),
+      showButton: showButton.evaluate(game, userId, context, card),
       size: size,
       type: type,
     );

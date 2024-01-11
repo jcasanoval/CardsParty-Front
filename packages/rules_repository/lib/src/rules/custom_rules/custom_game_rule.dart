@@ -16,14 +16,14 @@ class CustomGameRule extends GameRuleContract {
   @override
   Game applyRule(String userId, Game gameState) {
     final context = Context();
-    applyRuleExp.evaluate(gameState, userId, context);
+    applyRuleExp.evaluate(gameState, userId, context, null);
     return gameState;
   }
 
   @override
   UIElement? conditionMet(String userId, Game gameState) {
     final context = Context();
-    conditionMetExp.evaluate(gameState, userId, context);
+    conditionMetExp.evaluate(gameState, userId, context, null);
     return context.returnValue as UIElement?;
   }
 }
