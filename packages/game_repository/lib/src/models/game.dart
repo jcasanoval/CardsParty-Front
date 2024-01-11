@@ -2,12 +2,16 @@ import 'package:equatable/equatable.dart';
 import 'package:game_repository/game_repository.dart';
 import 'package:lobby_repository/lobby_repository.dart';
 
+/// Keys
 const _kId = 'id';
 const _kPlayers = 'players';
 const _kCustomParams = 'customParams';
 const _kHostId = 'hostId';
 const _kDeck = 'deck';
 const _kDiscardPile = 'discardPile';
+
+/// Gettet keys
+const _kPlayerCount = 'playerCount';
 
 /// {@template game}
 /// A Game.
@@ -99,10 +103,15 @@ class Game extends Equatable {
         return deck;
       case _kDiscardPile:
         return discardPile;
+      case _kPlayerCount:
+        return playerCount;
       default:
         return customParams[key];
     }
   }
+
+  /// Returns the number of players in the game.
+  int get playerCount => players.length;
 
   @override
   List<Object?> get props => [
