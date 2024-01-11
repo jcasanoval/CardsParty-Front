@@ -9,7 +9,7 @@ class CurrentCardStm extends Statement<Card> {
   const CurrentCardStm();
 
   @override
-  Card evaluate(Game game, String userId, Context context, [Card? card]) {
+  Card evaluate(Game game, String userId, Context context, Card? card) {
     if (card == null) {
       throw Exception('Card is null');
     }

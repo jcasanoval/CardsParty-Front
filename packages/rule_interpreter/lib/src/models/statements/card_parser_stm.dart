@@ -11,8 +11,8 @@ class CardToStringStm extends Statement<String> {
   final Statement<Card> cardStm;
 
   @override
-  String evaluate(Game game, String userId, Context context, [Card? card]) {
-    return cardStm.evaluate(game, userId, context).toString();
+  String evaluate(Game game, String userId, Context context, Card? card) {
+    return cardStm.evaluate(game, userId, context, card).toString();
   }
 }
 
@@ -26,7 +26,7 @@ class StringToCardStm extends Statement<Card> {
   final Statement<String> stringStm;
 
   @override
-  Card evaluate(Game game, String userId, Context context, [Card? card]) {
-    return Card.fromString(stringStm.evaluate(game, userId, context));
+  Card evaluate(Game game, String userId, Context context, Card? card) {
+    return Card.fromString(stringStm.evaluate(game, userId, context, card));
   }
 }

@@ -9,5 +9,5 @@ abstract class Statement<T> {
   const Statement();
 
   /// Evaluates the Statement and returns the result.
-  T evaluate(Game game, String userId, Context context, [Card? card]);
+  T evaluate(Game game, String userId, Context context, Card? card);
 }
