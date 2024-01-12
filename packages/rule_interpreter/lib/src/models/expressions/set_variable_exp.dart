@@ -2,7 +2,7 @@ import 'package:game_repository/game_repository.dart';
 import 'package:rule_interpreter/rule_interpreter.dart';
 
 /// {@template set_variable_exp}
-/// An Expression that sets a variable.
+/// An Expression that sets a variable either in the game or the context.
 /// {@endtemplate}
 class SetVariableExp extends Expression {
   /// {@macro set_variable_exp}
@@ -10,8 +10,8 @@ class SetVariableExp extends Expression {
 
   /// The name of the local variable to modify.
   ///
-  /// If the variable is nested, the name should be in the format:
-  /// `players[0].name`, `currentPlayer.name` or `game.name`
+  /// If the variable is located in the game, the name should be in the format:
+  /// `game.name`
   ///
   /// Otherwise, it will be assumed that the variable is in the context.
   final String variableName;
@@ -35,28 +35,6 @@ class SetVariableExp extends Expression {
     final parts = variableName.split('.');
     if (parts[0] == 'game') {
       game.customParams[parts[1]] = value.evaluate(game, userId, context, card);
-    }
-
-    if (parts[0] == 'currentPlayer') {
-      final player = game.players.firstWhere((player) => player.id == userId);
-      player.customParams[parts[1]] =
-          value.evaluate(game, userId, context, card);
-    }
-
-    if (parts[0].contains('players')) {
-      final playerIndex = RegExp(r'\[(\d+)\]').firstMatch(parts[0])?.group(1);
-      if (playerIndex == null) {
-        throw Exception('Invalid variable variableName: $variableName');
-      }
-
-      final parsedIndex = int.parse(playerIndex);
-      if (parsedIndex >= game.players.length || parsedIndex < 0) {
-        throw Exception('Player index out of bounds: $parsedIndex');
-      }
-
-      final player = game.players[parsedIndex];
-      player.customParams[parts[1]] =
-          value.evaluate(game, userId, context, card);
     }
   }
 }
