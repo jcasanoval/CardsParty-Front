@@ -46,7 +46,7 @@ const dealCardsCustomRule = CustomGameRule(
     then: IfExp(
       condition: BoolComparatorStm(
         BoolComparator.equal,
-        VariableStm('currentPlayer.id'),
+        PlayerVariableStm('id'),
         VariableStm('game.hostId'),
       ),
       then: ReturnButtonExp(
