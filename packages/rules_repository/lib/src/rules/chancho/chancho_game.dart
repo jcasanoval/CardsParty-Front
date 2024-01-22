@@ -10,5 +10,6 @@ const chanchoGame = GameRuleset(
     dealCardsCustomRule,
     ChanchoRule(),
     PassCardRule(),
+    // passCardCustomRule,
   ],
 );
