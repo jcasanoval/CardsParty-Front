@@ -30,7 +30,13 @@ class PlayerHand extends StatelessWidget {
         children: [
           Transform.rotate(
             angle: rotateText ? -rotation : 0,
-            child: Text(player.name),
+            child: Row(
+              children: [
+                Text(player.name),
+                const SizedBox(width: 8),
+                if (player.score != null) Text(player.score!.toString()),
+              ],
+            ),
           ),
           BlocBuilder<RulesCubit, RulesState>(
             buildWhen: (previous, current) => current is RulesLoaded,
