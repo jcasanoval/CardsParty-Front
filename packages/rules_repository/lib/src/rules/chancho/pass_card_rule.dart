@@ -147,6 +147,11 @@ const passCardCustomRule = CustomCardRule(
                 index: VariableStm('iterator'),
               ),
             ),
+            SetPlayerVariableExp(
+              variableName: 'chosenCard',
+              index: VariableStm('iterator'),
+              value: LiteralStm(null),
+            ),
             // Get next player index
             SetVariableExp(
               variableName: 'nextPlayerIndex',
@@ -184,6 +189,14 @@ const passCardCustomRule = CustomCardRule(
                 stringStm: VariableStm('chosenCard'),
               ),
               playerIndex: VariableStm('nextPlayerIndex'),
+            ),
+            SetVariableExp(
+              variableName: 'iterator',
+              value: MathStm(
+                VariableStm('iterator'),
+                MathOperator.add,
+                LiteralStm(1),
+              ),
             ),
           ],
         ),
