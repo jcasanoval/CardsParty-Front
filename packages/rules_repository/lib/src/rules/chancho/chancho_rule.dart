@@ -31,7 +31,8 @@ class ChanchoRule extends GameRuleContract {
         gameState.players.firstWhere((player) => player.id == userId);
     final state = gameState.customParams['state'] as String? ?? 'RoundStart';
     if (state == 'RoundInProgress' &&
-        player.cards.every((card) => card.number == player.cards[0].number)) {
+        (player.cards.every((card) => card.number == player.cards[0].number) ||
+            gameState.players.any((p) => p.customParams['chancho'] != null))) {
       return Button(
         showButton: true,
         buttonLabel: 'Chancho!',
