@@ -8,13 +8,14 @@ class SetupChanchoRule extends GameRuleContract {
   Game applyRule(String userId, Game gameState) {
     final cards = <Card>[];
     var i = 1;
-    for (final _ in gameState.players) {
+    for (final player in gameState.players) {
       cards
         ..add(Card(number: i, suit: Suit.club))
         ..add(Card(number: i, suit: Suit.diamond))
         ..add(Card(number: i, suit: Suit.heart))
         ..add(Card(number: i, suit: Suit.spade));
       i++;
+      player.score = 0;
     }
 
     cards.shuffle();
