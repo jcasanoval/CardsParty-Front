@@ -1,4 +1,5 @@
 import 'package:game_repository/game_repository.dart';
+import 'package:rule_interpreter/rule_interpreter.dart';
 import 'package:rules_repository/rules_repository.dart';
 
 class SetupChanchoRule extends GameRuleContract {
@@ -45,3 +46,95 @@ class SetupChanchoRule extends GameRuleContract {
     return null;
   }
 }
+
+const setupChanchoCustomRule = CustomGameRule(
+  priority: 0,
+  conditionMetExp: IfExp(
+    condition: BoolComparatorStm(
+        BoolComparator.equal, VariableStm('game.started'), LiteralStm(null)),
+    then: ReturnButtonExp(
+      buttonLabel: LiteralStm('Start game!'),
+      color: ButtonColor.green,
+      enabled: LiteralStm(true),
+      showButton: LiteralStm(true),
+      size: ButtonSize.medium,
+      type: ButtonType.rounded,
+    ),
+  ),
+  applyRuleExp: BlockExp(
+    expressions: [
+      SetVariableExp(
+        variableName: 'iterator',
+        value: LiteralStm(0),
+      ),
+      WhileExp(
+        condition: BoolComparatorStm(
+          BoolComparator.lessThan,
+          VariableStm('iterator'),
+          VariableStm('game.playerCount'),
+        ),
+        body: BlockExp(
+          expressions: [
+            SetScoreExp(
+              value: LiteralStm(0),
+              playerIndex: VariableStm('iterator'),
+            ),
+            SetVariableExp(
+              variableName: 'card',
+              value: CardStm(
+                number: VariableStm('iterator'),
+                suit: Suit.club,
+              ),
+            ),
+            AddCardExp(card: VariableStm('card')),
+            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
+            SetVariableExp(
+              variableName: 'card',
+              value: CardStm(
+                number: VariableStm('iterator'),
+                suit: Suit.diamond,
+              ),
+            ),
+            AddCardExp(card: VariableStm('card')),
+            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
+            SetVariableExp(
+              variableName: 'card',
+              value: CardStm(
+                number: VariableStm('iterator'),
+                suit: Suit.heart,
+              ),
+            ),
+            AddCardExp(card: VariableStm('card')),
+            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
+            SetVariableExp(
+              variableName: 'card',
+              value: CardStm(
+                number: VariableStm('iterator'),
+                suit: Suit.spade,
+              ),
+            ),
+            AddCardExp(card: VariableStm('card')),
+            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
+            SetVariableExp(
+              variableName: 'iterator',
+              value: MathStm(
+                VariableStm('iterator'),
+                MathOperator.add,
+                LiteralStm(1),
+              ),
+            ),
+          ],
+        ),
+      ),
+      ShuffleExp(),
+      SetVariableExp(
+        variableName: 'game.started',
+        value: LiteralStm(true),
+      ),
+      SetVariableExp(
+        variableName: 'game.state',
+        value: LiteralStm('RoundStart'),
+      ),
+    ],
+  ),
+);
