@@ -1,6 +1,7 @@
 export 'add_card_exp.dart';
 export 'block_exp.dart';
 export 'deal_each_exp.dart';
+export 'discard_exp.dart';
 export 'if_exp.dart';
 export 'remove_card_exp.dart';
 export 'return_button_exp.dart';
