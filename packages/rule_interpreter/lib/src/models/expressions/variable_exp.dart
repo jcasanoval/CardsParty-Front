@@ -4,9 +4,9 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template variable_stm}
 /// A Statement that returns a variable located in the game or context.
 /// {@endtemplate}
-class VariableStm<T> extends Statement<T> {
+class VariableExp<T> extends Expression<T> {
   /// {@macro variable_stm}
-  const VariableStm(this.name);
+  const VariableExp(this.name);
 
   /// The name of the local variable to return.
   ///

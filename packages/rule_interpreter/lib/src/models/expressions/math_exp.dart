@@ -4,19 +4,19 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template math_stm}
 /// A Statement that performs a mathematical operation on two Statements.
 /// {@endtemplate}
-class MathStm extends Statement<num> {
+class MathExp extends Expression<num> {
   /// {@macro math_stm}
-  const MathStm(
+  const MathExp(
     this.left,
     this.operator,
     this.right,
   );
 
   /// The left side of the operation.
-  final Statement<num> left;
+  final Expression<num> left;
 
   /// The right side of the operation.
-  final Statement<num> right;
+  final Expression<num> right;
 
   /// The operator to use.
   final MathOperator operator;

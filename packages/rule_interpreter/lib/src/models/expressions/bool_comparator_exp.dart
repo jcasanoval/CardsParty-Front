@@ -4,18 +4,18 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template bool_comparator_stm}
 /// A Statement that returns a boolean based on the comparator.
 /// {@endtemplate}
-class BoolComparatorStm extends Statement<bool> {
+class BoolComparatorExp extends Expression<bool> {
   /// {@macro bool_comparator_stm}
-  const BoolComparatorStm(this.comparator, this.left, this.right);
+  const BoolComparatorExp(this.comparator, this.left, this.right);
 
   /// The comparator to use.
   final BoolComparator comparator;
 
   /// The left side of the comparator.
-  final Statement<dynamic> left;
+  final Expression<dynamic> left;
 
   /// The right side of the comparator.
-  final Statement<dynamic> right;
+  final Expression<dynamic> right;
 
   @override
   bool evaluate(Game game, String userId, Context context, Card? card) {

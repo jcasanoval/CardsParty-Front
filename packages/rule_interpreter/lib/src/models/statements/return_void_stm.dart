@@ -6,9 +6,9 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 ///
 /// This is used to avoid executing the rest of the function.
 /// {@endtemplate}
-class ReturnVoidExp extends Expression {
+class ReturnVoidStm extends Statement {
   /// {@macro return_void_exp}
-  const ReturnVoidExp();
+  const ReturnVoidStm();
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

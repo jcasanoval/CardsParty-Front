@@ -5,15 +5,15 @@ import 'package:rules_repository/rules_repository.dart';
 /// {@template return_drag_exp}
 /// An Expression that returns a drag.
 /// {@endtemplate}
-class ReturnDragExp extends Expression {
+class ReturnDragStm extends Statement {
   /// {@macro return_drag_exp}
-  const ReturnDragExp({
+  const ReturnDragStm({
     required this.enabled,
     required this.visibility,
   });
 
   /// Whether or not the button is enabled.
-  final Statement<bool> enabled;
+  final Expression<bool> enabled;
 
   final CardVisibility visibility;
 

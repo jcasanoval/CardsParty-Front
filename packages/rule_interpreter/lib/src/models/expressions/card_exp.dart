@@ -4,15 +4,15 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template card_stm}
 /// Statement that represents a card.
 /// {@endtemplate}
-class CardStm extends Statement<Card> {
+class CardExp extends Expression<Card> {
   /// {@macro card_stm}
-  const CardStm({
+  const CardExp({
     required this.number,
     required this.suit,
   });
 
   /// The number of the card.
-  final Statement<int> number;
+  final Expression<int> number;
 
   /// The suit of the card.
   final Suit suit;

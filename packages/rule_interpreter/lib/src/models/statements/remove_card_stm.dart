@@ -4,20 +4,20 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template remove_card_exp}
 /// Expression that removes a card from the player's hand.
 /// {@endtemplate}
-class RemoveCardExp extends Expression {
+class RemoveCardStm extends Statement {
   /// {@macro remove_card_exp}
-  const RemoveCardExp({
+  const RemoveCardStm({
     required this.card,
     this.playerIndex,
   });
 
   /// The card to remove.
-  final Statement<Card> card;
+  final Expression<Card> card;
 
   /// The player to remove the card from.
   ///
   /// If null the current player will be used.
-  final Statement<int>? playerIndex;
+  final Expression<int>? playerIndex;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

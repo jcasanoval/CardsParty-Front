@@ -4,9 +4,9 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template literal_stm}
 /// A Statement that returns a literal value.
 /// {@endtemplate}
-class LiteralStm<T> extends Statement<T> {
+class LiteralExp<T> extends Expression<T> {
   /// {@macro literal_stm}
-  const LiteralStm(this.value);
+  const LiteralExp(this.value);
 
   /// The literal value to return.
   final T value;
