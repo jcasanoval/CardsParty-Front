@@ -7,9 +7,9 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// If [index] is not provided, the variable will set returned in the current
 /// player.
 /// {@endtemplate}
-class SetPlayerVariableExp extends Expression {
+class SetPlayerVariableStm extends Statement {
   /// {@macro set_player_variable_exp}
-  const SetPlayerVariableExp({
+  const SetPlayerVariableStm({
     required this.variableName,
     required this.value,
     this.index,
@@ -19,10 +19,10 @@ class SetPlayerVariableExp extends Expression {
   final String variableName;
 
   /// The value to set the variable to.
-  final Statement<dynamic> value;
+  final Expression<dynamic> value;
 
   /// The index of the player to set the variable in.
-  final Statement<int>? index;
+  final Expression<int>? index;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

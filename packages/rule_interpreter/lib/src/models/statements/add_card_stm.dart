@@ -4,20 +4,20 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template add_card_exp}
 /// Expression that adds a card to the player's hand.
 /// {@endtemplate}
-class AddCardExp extends Expression {
+class AddCardStm extends Statement {
   /// {@macro add_card_exp}
-  const AddCardExp({
+  const AddCardStm({
     required this.card,
     this.playerIndex,
   });
 
   /// The card to add.
-  final Statement<Card> card;
+  final Expression<Card> card;
 
   /// The player to add the card to.
   ///
   /// If null the current player will be used.
-  final Statement<int>? playerIndex;
+  final Expression<int>? playerIndex;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

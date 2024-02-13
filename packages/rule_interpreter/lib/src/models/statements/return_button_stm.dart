@@ -5,9 +5,9 @@ import 'package:rules_repository/rules_repository.dart';
 /// {@template return_button_exp}
 /// An Expression that returns a button.
 /// {@endtemplate}
-class ReturnButtonExp extends Expression {
+class ReturnButtonStm extends Statement {
   /// {@macro return_button_exp}
-  const ReturnButtonExp({
+  const ReturnButtonStm({
     required this.buttonLabel,
     required this.color,
     required this.enabled,
@@ -17,13 +17,13 @@ class ReturnButtonExp extends Expression {
   });
 
   /// The label of the button.
-  final Statement<String> buttonLabel;
+  final Expression<String> buttonLabel;
 
   /// Whether or not the button is enabled.
-  final Statement<bool> enabled;
+  final Expression<bool> enabled;
 
   /// Whether or not the button is shown.
-  final Statement<bool> showButton;
+  final Expression<bool> showButton;
 
   /// The color of the button.
   final ButtonColor color;

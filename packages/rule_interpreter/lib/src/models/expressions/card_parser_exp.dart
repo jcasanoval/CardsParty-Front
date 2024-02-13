@@ -4,11 +4,11 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template card_to_string_stm}
 /// A Statement that returns the string representation of a card.
 /// {@endtemplate}
-class CardToStringStm extends Statement<String> {
+class CardToStringExp extends Expression<String> {
   /// {@macro card_to_string_stm}
-  const CardToStringStm({required this.cardStm});
+  const CardToStringExp({required this.cardStm});
 
-  final Statement<Card> cardStm;
+  final Expression<Card> cardStm;
 
   @override
   String evaluate(Game game, String userId, Context context, Card? card) {
@@ -19,11 +19,11 @@ class CardToStringStm extends Statement<String> {
 /// {@template string_to_card_stm}
 /// A Statement that returns the card representation of a string.
 /// {@endtemplate}
-class StringToCardStm extends Statement<Card> {
+class StringToCardExp extends Expression<Card> {
   /// {@macro string_to_card_stm}
-  const StringToCardStm({required this.stringStm});
+  const StringToCardExp({required this.stringStm});
 
-  final Statement<String> stringStm;
+  final Expression<String> stringStm;
 
   @override
   Card evaluate(Game game, String userId, Context context, Card? card) {

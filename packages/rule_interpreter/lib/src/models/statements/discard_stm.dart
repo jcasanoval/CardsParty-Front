@@ -4,23 +4,23 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template discard_exp}
 /// Expression that discards a card from the player's hand.
 /// {@endtemplate}
-class DiscardExp extends Expression {
+class DiscardStm extends Statement {
   /// {@macro discard_exp}
-  const DiscardExp({
+  const DiscardStm({
     required this.discard,
     this.playerIndex,
-    this.deck = const LiteralStm(false),
+    this.deck = const LiteralExp(false),
   });
 
   /// The card to discard.
-  final Statement<Card> discard;
+  final Expression<Card> discard;
 
   /// The player to discard the card from.
-  final Statement<int>? playerIndex;
+  final Expression<int>? playerIndex;
 
   /// If true, the card will be discarded to de deck rather than to the discard
   /// pile.
-  final Statement<bool> deck;
+  final Expression<bool> deck;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

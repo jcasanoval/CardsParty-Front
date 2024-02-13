@@ -58,144 +58,144 @@ class PassCardRule extends CardRuleContract {
 
 const passCardCustomRule = CustomCardRule(
   priority: 2,
-  conditionMetExp: BlockExp(
+  conditionMetExp: BlockStm(
     expressions: [
-      IfExp(
-        condition: BoolComparatorStm(
+      IfStm(
+        condition: BoolComparatorExp(
           BoolComparator.equal,
-          PlayerVariableStm('chosenCard'),
-          LiteralStm(null),
+          PlayerVariableExp('chosenCard'),
+          LiteralExp(null),
         ),
-        then: IfExp(
-          condition: BoolComparatorStm(
+        then: IfStm(
+          condition: BoolComparatorExp(
             BoolComparator.equal,
-            VariableStm('game.state'),
-            LiteralStm('RoundInProgress'),
+            VariableExp('game.state'),
+            LiteralExp('RoundInProgress'),
           ),
-          then: IfExp(
-            condition: HasCardStm(),
-            then: ReturnDragExp(
-              enabled: LiteralStm(true),
+          then: IfStm(
+            condition: HasCardExp(),
+            then: ReturnDragStm(
+              enabled: LiteralExp(true),
               visibility: CardVisibility.visible,
             ),
           ),
         ),
       ),
-      ReturnDragExp(
-        enabled: LiteralStm(false),
+      ReturnDragStm(
+        enabled: LiteralExp(false),
         visibility: CardVisibility.visible,
       ),
     ],
   ),
-  applyRuleExp: BlockExp(
+  applyRuleExp: BlockStm(
     expressions: [
       // Choose card
-      SetPlayerVariableExp(
+      SetPlayerVariableStm(
         variableName: 'chosenCard',
-        value: CardToStringStm(cardStm: CurrentCardStm()),
+        value: CardToStringExp(cardStm: CurrentCardExp()),
       ),
-      SetVariableExp(
+      SetVariableStm(
         variableName: 'iterator',
-        value: LiteralStm(0),
+        value: LiteralExp(0),
       ),
       // Return early if not all players have chosen a card
-      WhileExp(
-        condition: BoolComparatorStm(
+      WhileStm(
+        condition: BoolComparatorExp(
           BoolComparator.lessThan,
-          VariableStm('iterator'),
-          VariableStm('game.playerCount'),
+          VariableExp('iterator'),
+          VariableExp('game.playerCount'),
         ),
-        body: IfExp(
-          condition: BoolComparatorStm(
+        body: IfStm(
+          condition: BoolComparatorExp(
             BoolComparator.equal,
-            PlayerVariableStm(
+            PlayerVariableExp(
               'chosenCard',
-              index: VariableStm('iterator'),
+              index: VariableExp('iterator'),
             ),
-            LiteralStm(null),
+            LiteralExp(null),
           ),
-          then: ReturnVoidExp(),
-          otherwise: SetVariableExp(
+          then: ReturnVoidStm(),
+          otherwise: SetVariableStm(
             variableName: 'iterator',
-            value: MathStm(
-              VariableStm('iterator'),
+            value: MathExp(
+              VariableExp('iterator'),
               MathOperator.add,
-              LiteralStm(1),
+              LiteralExp(1),
             ),
           ),
         ),
       ),
       // Reset iterator
-      SetVariableExp(
+      SetVariableStm(
         variableName: 'iterator',
-        value: LiteralStm(0),
+        value: LiteralExp(0),
       ),
       // Shift cards one place
-      WhileExp(
-        condition: BoolComparatorStm(
+      WhileStm(
+        condition: BoolComparatorExp(
           BoolComparator.lessThan,
-          VariableStm('iterator'),
-          VariableStm('game.playerCount'),
+          VariableExp('iterator'),
+          VariableExp('game.playerCount'),
         ),
-        body: BlockExp(
+        body: BlockStm(
           expressions: [
             // Get chosen card
-            SetVariableExp(
+            SetVariableStm(
               variableName: 'chosenCard',
-              value: PlayerVariableStm(
+              value: PlayerVariableExp(
                 'chosenCard',
-                index: VariableStm('iterator'),
+                index: VariableExp('iterator'),
               ),
             ),
-            SetPlayerVariableExp(
+            SetPlayerVariableStm(
               variableName: 'chosenCard',
-              index: VariableStm('iterator'),
-              value: LiteralStm(null),
+              index: VariableExp('iterator'),
+              value: LiteralExp(null),
             ),
             // Get next player index
-            SetVariableExp(
+            SetVariableStm(
               variableName: 'nextPlayerIndex',
-              value: MathStm(
-                VariableStm(
+              value: MathExp(
+                VariableExp(
                   'iterator',
                 ),
                 MathOperator.add,
-                LiteralStm(1),
+                LiteralExp(1),
               ),
             ),
             // Check if next player index is greater than player count,
             // then reset to 0
-            IfExp(
-              condition: BoolComparatorStm(
+            IfStm(
+              condition: BoolComparatorExp(
                 BoolComparator.greaterThanOrEqual,
-                VariableStm('nextPlayerIndex'),
-                VariableStm('game.playerCount'),
+                VariableExp('nextPlayerIndex'),
+                VariableExp('game.playerCount'),
               ),
-              then: SetVariableExp(
+              then: SetVariableStm(
                 variableName: 'nextPlayerIndex',
-                value: LiteralStm(0),
+                value: LiteralExp(0),
               ),
             ),
             // Remove chosen card from player
-            RemoveCardExp(
-              card: StringToCardStm(
-                stringStm: VariableStm('chosenCard'),
+            RemoveCardStm(
+              card: StringToCardExp(
+                stringStm: VariableExp('chosenCard'),
               ),
-              playerIndex: VariableStm('iterator'),
+              playerIndex: VariableExp('iterator'),
             ),
             // Add chosen card to next player
-            AddCardExp(
-              card: StringToCardStm(
-                stringStm: VariableStm('chosenCard'),
+            AddCardStm(
+              card: StringToCardExp(
+                stringStm: VariableExp('chosenCard'),
               ),
-              playerIndex: VariableStm('nextPlayerIndex'),
+              playerIndex: VariableExp('nextPlayerIndex'),
             ),
-            SetVariableExp(
+            SetVariableStm(
               variableName: 'iterator',
-              value: MathStm(
-                VariableStm('iterator'),
+              value: MathExp(
+                VariableExp('iterator'),
                 MathOperator.add,
-                LiteralStm(1),
+                LiteralExp(1),
               ),
             ),
           ],

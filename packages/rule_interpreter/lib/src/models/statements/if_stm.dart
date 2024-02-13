@@ -4,22 +4,22 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template if_exp}
 /// An Expression that evaluates a condition and calls the then or otherwise
 /// {@endtemplate}
-class IfExp extends Expression {
+class IfStm extends Statement {
   /// {@macro if_exp}
-  const IfExp({
+  const IfStm({
     required this.condition,
     required this.then,
     this.otherwise,
   });
 
   /// The condition to evaluate.
-  final Statement<bool> condition;
+  final Expression<bool> condition;
 
   /// The Expression to evaluate if the condition is true.
-  final Expression then;
+  final Statement then;
 
   /// The Expression to evaluate if the condition is false.
-  final Expression? otherwise;
+  final Statement? otherwise;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

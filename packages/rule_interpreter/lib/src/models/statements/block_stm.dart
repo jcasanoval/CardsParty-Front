@@ -4,11 +4,12 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template block_exp}
 /// An Expression that evaluates a list of Expressions.
 /// {@endtemplate}
-class BlockExp extends Expression {
+class BlockStm extends Statement {
   /// {@macro block_exp}
-  const BlockExp({required this.expressions});
+  const BlockStm({required this.expressions});
 
-  final List<Expression> expressions;
+  /// The expressions to evaluate.
+  final List<Statement> expressions;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

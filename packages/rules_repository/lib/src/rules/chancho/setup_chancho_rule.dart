@@ -49,91 +49,91 @@ class SetupChanchoRule extends GameRuleContract {
 
 const setupChanchoCustomRule = CustomGameRule(
   priority: 0,
-  conditionMetExp: IfExp(
-    condition: BoolComparatorStm(
-        BoolComparator.equal, VariableStm('game.started'), LiteralStm(null)),
-    then: ReturnButtonExp(
-      buttonLabel: LiteralStm('Start game!'),
+  conditionMetExp: IfStm(
+    condition: BoolComparatorExp(
+        BoolComparator.equal, VariableExp('game.started'), LiteralExp(null)),
+    then: ReturnButtonStm(
+      buttonLabel: LiteralExp('Start game!'),
       color: ButtonColor.green,
-      enabled: LiteralStm(true),
-      showButton: LiteralStm(true),
+      enabled: LiteralExp(true),
+      showButton: LiteralExp(true),
       size: ButtonSize.medium,
       type: ButtonType.rounded,
     ),
   ),
-  applyRuleExp: BlockExp(
+  applyRuleExp: BlockStm(
     expressions: [
-      SetVariableExp(
+      SetVariableStm(
         variableName: 'iterator',
-        value: LiteralStm(0),
+        value: LiteralExp(0),
       ),
-      WhileExp(
-        condition: BoolComparatorStm(
+      WhileStm(
+        condition: BoolComparatorExp(
           BoolComparator.lessThan,
-          VariableStm('iterator'),
-          VariableStm('game.playerCount'),
+          VariableExp('iterator'),
+          VariableExp('game.playerCount'),
         ),
-        body: BlockExp(
+        body: BlockStm(
           expressions: [
-            SetScoreExp(
-              value: LiteralStm(0),
-              playerIndex: VariableStm('iterator'),
+            SetScoreStm(
+              value: LiteralExp(0),
+              playerIndex: VariableExp('iterator'),
             ),
-            SetVariableExp(
+            SetVariableStm(
               variableName: 'card',
-              value: CardStm(
-                number: VariableStm('iterator'),
+              value: CardExp(
+                number: VariableExp('iterator'),
                 suit: Suit.club,
               ),
             ),
-            AddCardExp(card: VariableStm('card')),
-            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
-            SetVariableExp(
+            AddCardStm(card: VariableExp('card')),
+            DiscardStm(discard: VariableExp('card'), deck: LiteralExp(true)),
+            SetVariableStm(
               variableName: 'card',
-              value: CardStm(
-                number: VariableStm('iterator'),
+              value: CardExp(
+                number: VariableExp('iterator'),
                 suit: Suit.diamond,
               ),
             ),
-            AddCardExp(card: VariableStm('card')),
-            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
-            SetVariableExp(
+            AddCardStm(card: VariableExp('card')),
+            DiscardStm(discard: VariableExp('card'), deck: LiteralExp(true)),
+            SetVariableStm(
               variableName: 'card',
-              value: CardStm(
-                number: VariableStm('iterator'),
+              value: CardExp(
+                number: VariableExp('iterator'),
                 suit: Suit.heart,
               ),
             ),
-            AddCardExp(card: VariableStm('card')),
-            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
-            SetVariableExp(
+            AddCardStm(card: VariableExp('card')),
+            DiscardStm(discard: VariableExp('card'), deck: LiteralExp(true)),
+            SetVariableStm(
               variableName: 'card',
-              value: CardStm(
-                number: VariableStm('iterator'),
+              value: CardExp(
+                number: VariableExp('iterator'),
                 suit: Suit.spade,
               ),
             ),
-            AddCardExp(card: VariableStm('card')),
-            DiscardExp(discard: VariableStm('card'), deck: LiteralStm(true)),
-            SetVariableExp(
+            AddCardStm(card: VariableExp('card')),
+            DiscardStm(discard: VariableExp('card'), deck: LiteralExp(true)),
+            SetVariableStm(
               variableName: 'iterator',
-              value: MathStm(
-                VariableStm('iterator'),
+              value: MathExp(
+                VariableExp('iterator'),
                 MathOperator.add,
-                LiteralStm(1),
+                LiteralExp(1),
               ),
             ),
           ],
         ),
       ),
-      ShuffleExp(),
-      SetVariableExp(
+      ShuffleStm(),
+      SetVariableStm(
         variableName: 'game.started',
-        value: LiteralStm(true),
+        value: LiteralExp(true),
       ),
-      SetVariableExp(
+      SetVariableStm(
         variableName: 'game.state',
-        value: LiteralStm('RoundStart'),
+        value: LiteralExp('RoundStart'),
       ),
     ],
   ),

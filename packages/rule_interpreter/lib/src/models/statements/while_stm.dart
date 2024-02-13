@@ -5,18 +5,18 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// An Expression that will evaluate the condition and execute the body while
 /// the condition is true.
 /// {@endtemplate}
-class WhileExp extends Expression {
+class WhileStm extends Statement {
   /// {@macro while_exp}
-  const WhileExp({
+  const WhileStm({
     required this.condition,
     required this.body,
   });
 
   /// The condition of the while loop.
-  final Statement<bool> condition;
+  final Expression<bool> condition;
 
   /// The body of the while loop.
-  final Expression body;
+  final Statement body;
 
   @override
   void evaluate(Game game, String userId, Context context, [Card? card]) {

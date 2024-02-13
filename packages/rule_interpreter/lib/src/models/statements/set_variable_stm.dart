@@ -4,9 +4,9 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template set_variable_exp}
 /// An Expression that sets a variable either in the game or the context.
 /// {@endtemplate}
-class SetVariableExp extends Expression {
+class SetVariableStm extends Statement {
   /// {@macro set_variable_exp}
-  const SetVariableExp({required this.variableName, required this.value});
+  const SetVariableStm({required this.variableName, required this.value});
 
   /// The name of the local variable to modify.
   ///
@@ -17,7 +17,7 @@ class SetVariableExp extends Expression {
   final String variableName;
 
   /// The value to set the variable to.
-  final Statement<dynamic> value;
+  final Expression<dynamic> value;
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {

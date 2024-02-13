@@ -7,15 +7,15 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// If [index] is not provided, the variable will be returned from the current
 /// player.
 /// {@endtemplate}
-class PlayerVariableStm<T> extends Statement<T> {
+class PlayerVariableExp<T> extends Expression<T> {
   /// {@macro player_variable_stm}
-  const PlayerVariableStm(this.name, {this.index});
+  const PlayerVariableExp(this.name, {this.index});
 
   /// The name of the local variable to return.
   final String name;
 
   /// The index of the player to return the variable from.
-  final Statement<int>? index;
+  final Expression<int>? index;
 
   @override
   T evaluate(Game game, String userId, Context context, Card? card) {

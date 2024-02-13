@@ -9,9 +9,9 @@ class CustomCardRule extends CardRuleContract {
     required super.priority,
   });
 
-  final Expression applyRuleExp;
+  final Statement applyRuleExp;
 
-  final Expression conditionMetExp;
+  final Statement conditionMetExp;
 
   @override
   Game applyRule(String userId, Game gameState, Card card) {

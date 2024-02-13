@@ -37,34 +37,34 @@ class DealCardsRule extends GameRuleContract {
 
 const dealCardsCustomRule = CustomGameRule(
   priority: 1,
-  conditionMetExp: IfExp(
-    condition: BoolComparatorStm(
+  conditionMetExp: IfStm(
+    condition: BoolComparatorExp(
       BoolComparator.equal,
-      VariableStm('game.state'),
-      LiteralStm('RoundStart'),
+      VariableExp('game.state'),
+      LiteralExp('RoundStart'),
     ),
-    then: IfExp(
-      condition: BoolComparatorStm(
+    then: IfStm(
+      condition: BoolComparatorExp(
         BoolComparator.equal,
-        PlayerVariableStm('id'),
-        VariableStm('game.hostId'),
+        PlayerVariableExp('id'),
+        VariableExp('game.hostId'),
       ),
-      then: ReturnButtonExp(
-        buttonLabel: LiteralStm('Deal cards!'),
-        enabled: LiteralStm(true),
-        showButton: LiteralStm(true),
+      then: ReturnButtonStm(
+        buttonLabel: LiteralExp('Deal cards!'),
+        enabled: LiteralExp(true),
+        showButton: LiteralExp(true),
         color: ButtonColor.yellow,
         size: ButtonSize.medium,
         type: ButtonType.rounded,
       ),
     ),
   ),
-  applyRuleExp: BlockExp(
+  applyRuleExp: BlockStm(
     expressions: [
-      DealEachExp(amount: LiteralStm(4)),
-      SetVariableExp(
+      DealEachStm(amount: LiteralExp(4)),
+      SetVariableStm(
         variableName: 'game.state',
-        value: LiteralStm('RoundInProgress'),
+        value: LiteralExp('RoundInProgress'),
       ),
     ],
   ),

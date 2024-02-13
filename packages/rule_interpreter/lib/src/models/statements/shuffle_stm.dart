@@ -4,9 +4,9 @@ import 'package:rule_interpreter/rule_interpreter.dart';
 /// {@template shuffle_exp}
 /// Expression that shuffles the deck.
 /// {@endtemplate}
-class ShuffleExp extends Expression {
+class ShuffleStm extends Statement {
   /// {@macro shuffle_exp}
-  const ShuffleExp();
+  const ShuffleStm();
 
   @override
   void evaluate(Game game, String userId, Context context, Card? card) {
